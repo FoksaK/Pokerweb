@@ -1,0 +1,20 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Pokerweb.Pages.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form asp-page-handler="in" method="post">
+
+    <input type="text" asp-for="NameIn" />
+    <input type="text" asp-for="KeyIn" />
+    <button asp-page-handler="in" class="btn btn-default">In</button>
+    <button asp-page-handler="new" class="btn btn-default">New</button>
+
+</form>
+
+
+<h3 class="clearfix">@Model.Message</h3>
