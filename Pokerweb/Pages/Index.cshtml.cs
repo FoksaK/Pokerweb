@@ -77,6 +77,8 @@ namespace Pokerweb.Pages
 
             if (Ks.Length == 6 && IsInDatabase(K) == true && N.Length > 0 && N.Length < 50 && (AlreadyUsed(K, N) == false))
             {
+                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).Players.Add(new Player { PlayerName = N });
+
                 return RedirectToPage("GamePage", new { key = K, name = N });
             }
             else
