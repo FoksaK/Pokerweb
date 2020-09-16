@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Pokerweb.Data;
+using Pokerweb.Hubs;
 
 namespace Pokerweb.Pages
 {
@@ -22,6 +23,11 @@ namespace Pokerweb.Pages
 
             Key = key;
             Name = name;
+
+            
+
         }
+
+
     }
 }
