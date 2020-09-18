@@ -37,8 +37,8 @@ namespace Pokerweb
             app.UseRouting();
 
             app.UseStaticFiles();
+            app.UseHttpsRedirection();
 
-            
 
             app.UseEndpoints(endpoints =>
             {
