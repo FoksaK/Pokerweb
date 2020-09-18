@@ -10,5 +10,8 @@ namespace Pokerweb.Models
     {
         public int KeyNumber { get; set; }
         public List<Player> Players { get; set; }
+        public List<string> Cards { get; set; }
+        public int Sum { get; set; }
+        public bool InGame { get; set; }
     }
 }

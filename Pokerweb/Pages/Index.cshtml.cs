@@ -47,7 +47,7 @@ namespace Pokerweb.Pages
             {
                 List<Player> P = new List<Player>();
                 P.Add(new Player { PlayerName = N });
-                RoomsDbContext.RoomsList.Add(new Room { KeyNumber = Key, Players = P});
+                RoomsDbContext.RoomsList.Add(new Room { KeyNumber = Key, Players = P });
                 return RedirectToPage("GamePage", new { key = Key, name = N });
             }
             else

@@ -1,50 +1,32 @@
-﻿@page /* "{key?}/{name?}"
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@page "/{key?}/{name?}"
 @model Pokerweb.Pages.GamePageModel
-@{
-    ViewData["Title"] = "Poker";
-}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{Layout = "_Layout.cshtml";}
+
+<script type="text/javascript" src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="~/js/Chat.js"></script>
 
 <h1>GamePage</h1>
 
-Key: @Model.Key
+<h2>Klíč: @Model.Key Jméno: @Model.Name</h2>
 
-Name: @Model.Name
+<h3>Msg: @Model.Message </h3>
 
-Msg: @Model.Message
+<ul id="messagesList"></ul>
 
-<form method="post">
-    <button asp-page-handler="Jedna"> kkk </button>
-</form>*/
+<button class="btn btn-primary" id="load">Load</button>
 
-<h1>Teď</h1>
+<div id="grid"></div>
 
-<div class="container">
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-2">User</div>
-        <div class="col-4"><input type="text" id="userInput" /></div>
-    </div>
-    <div class="row">
-        <div class="col-2">Message</div>
-        <div class="col-4"><input type="text" id="messageInput" /></div>
-    </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-6">
-            <input type="button" id="sendButton" value="Send Message" />
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <hr />
-    </div>
-</div>
-<div class="row">
-    <div class="col-6">
-        <ul id="messagesList"></ul>
-    </div>
-</div>
-<script type="text/javascript" src="~/js/signalr/dist/browser/signalr.js"></script>
-<script type="text/javascript" src="~/js/Chat.js"></script>
+
+
+<script>
+    $(function () {
+        $('#load').on('click', function () {
+            $('#grid').load('/GamePage?handler=PlayersPartial');
+        });
+    });
+</script>

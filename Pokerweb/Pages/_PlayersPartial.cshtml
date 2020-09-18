@@ -1,0 +1,18 @@
+﻿@using Pokerweb.Models
+@model Room
+
+<h3>@Model.Sum</h3>
+
+<table class="table table-striped">
+    @foreach (var player in Model.Players)
+    {
+        <tr>
+            <td>@player.PlayerName</td>
+            <td>@player.Money</td>
+        </tr>
+    }
+</table>
+
+<button class="btn btn-primary" id="Fols">Fold</button>
+<button class="btn btn-primary" id="Check">Check</button>
+<button class="btn btn-primary" id="Raise">Raise</button>

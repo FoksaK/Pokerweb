@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Pokerweb.Data;
 using Pokerweb.Hubs;
+using Pokerweb.Models;
 
 namespace Pokerweb.Pages
 {
@@ -24,8 +26,23 @@ namespace Pokerweb.Pages
             Key = key;
             Name = name;
 
-            
+        }
 
+
+        public Room _Room { get; set; }
+
+       
+
+        public PartialViewResult OnGetPlayersPartial()
+        {
+
+           _Room = RoomsDbContext.RoomsList[0];
+            PartialViewResult _resultPartialPage = new PartialViewResult()
+            {
+                ViewName = "_PlayersPartial",
+                ViewData = new ViewDataDictionary<List<Player>>(ViewData, _Room),
+            };
+            return _resultPartialPage;
         }
 
 
