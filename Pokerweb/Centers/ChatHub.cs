@@ -7,14 +7,19 @@ namespace Pokerweb.Hubs
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(int Key)
+        public async Task SendMessage(string user, string message)
         {
-            RoomsDbContext.RoomsList[1].Players.Add(new Models.Player { Money = 50, PlayerName = "Dalibor" });
 
-            await Clients.All.SendAsync("ReceiveMessage");
+            if (RoomsDbContext.prvni == true)
+            {
+                RoomsDbContext.prvni = false;
+                RoomsDbContext.s = Context.ConnectionId;
+            }
+
+            await Clients.Client(RoomsDbContext.s).SendAsync("ReceiveMessage", user, message);
               
         }
-
+        
     }
 
 }
