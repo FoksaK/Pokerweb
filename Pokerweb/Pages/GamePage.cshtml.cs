@@ -40,7 +40,7 @@ namespace Pokerweb.Pages
             PartialViewResult _resultPartialPage = new PartialViewResult()
             {
                 ViewName = "_PlayersPartial",
-                ViewData = new ViewDataDictionary<List<Player>>(ViewData, _Room),
+                ViewData = new ViewDataDictionary<Room>(ViewData, _Room),
             };
             return _resultPartialPage;
         }

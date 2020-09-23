@@ -16,8 +16,8 @@ namespace Pokerweb.Hubs
                 RoomsDbContext.s = Context.ConnectionId;
             }
 
-            await Clients.Client(RoomsDbContext.s).SendAsync("ReceiveMessage", user, message);
-              
+            await Clients.All.SendAsync("ReceiveMessage", user, message);//Client(RoomsDbContext.s).SendAsync("ReceiveMessage", user, message);
+
         }
         
     }
