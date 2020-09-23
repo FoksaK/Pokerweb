@@ -28,23 +28,27 @@ namespace Pokerweb.Pages
 
         }
 
-
         public Room _Room { get; set; }
 
        
-
         public PartialViewResult OnGetPlayersPartial()
         {
 
-           _Room = RoomsDbContext.RoomsList[0];
+           _Room = RoomsDbContext.RoomsList[1];
             PartialViewResult _resultPartialPage = new PartialViewResult()
             {
                 ViewName = "_PlayersPartial",
-                ViewData = new ViewDataDictionary<List<Player>>(ViewData, _Room),
+                ViewData = new ViewDataDictionary<Room>(ViewData, _Room),
             };
             return _resultPartialPage;
         }
 
+        public void Jedna()
+        {
+
+            RoomsDbContext.RoomsList[1].Players.Add(new Player { PlayerName = "dan", Money = 309 });
+            
+        }
 
     }
 }
