@@ -18,10 +18,6 @@ namespace Pokerweb.Pages
 
         public void OnGet()
         {
-            List<Player> p = new List<Player>();
-            p.Add(new Player { Id = 3, PlayerName = "Karel" });
-
-            RoomsDbContext.RoomsList.Add(new Room() { KeyNumber = 5, Players = p  });
         }
 
 

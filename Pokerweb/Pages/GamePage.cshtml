@@ -8,57 +8,47 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+
+
 <h1>GamePage</h1>
 
-<h2>Klíč: @Model.Key Jméno: @Model.Name</h2>
+<h2 id="key">@Model.Key</h2>
+<h2 id="name">@Model.Name</h2>
 
 <h3>Msg: @Model.Message </h3>
 
 <ul id="messagesList"></ul>
 
-<button class="btn btn-primary" id="load">Load</button>
 
 <div id="grid"></div>
 
 
+<button class="Playbuttons" id="Fold">Fold</button>
+<button class="Playbuttons" id="Check">Check</button>
+<button class="Playbuttons" id="Raise">Raise</button>
 
-<script>
-    $(function () {
-        $('#load').on('click', function () {
-            $('#grid').load('/GamePage?handler=PlayersPartial');
-        });
-    });
+<input type="range" min="1" max="100" value="50" class="Playbuttons" id="Range">
+<p class="Playbuttons" >Value: <span id="demo"></span></p>
+
+<button id="PlayButton" style=" display: none; ">Play</button>
+
+
+
+<script type="text/javascript">
+    var slider = document.getElementById("Range");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value; // Display the default slider value
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    }
 </script>
 
-
-<div class="container">
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-2">User</div>
-        <div class="col-4"><input type="text" id="userInput" /></div>
-    </div>
-    <div class="row">
-        <div class="col-2">Message</div>
-        <div class="col-4"><input type="text" id="messageInput" /></div>
-    </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-6">
-            <input type="button" id="sendButton" value="Send Message" />
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <hr />
-    </div>
-</div>
-<div class="row">
-    <div class="col-6">
-        <ul id="messagesList"></ul>
-    </div>
-</div>
-
-
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/chat.js"></script>
+<style>
+    .Playbuttons {
+        display: none;
+    }
+</style>

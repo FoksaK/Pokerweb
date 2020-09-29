@@ -9,6 +9,11 @@ using Pokerweb.Data;
 using Pokerweb.Hubs;
 using Pokerweb.Models;
 
+
+//udělat ReceivePlayMessage v js, aby se to nějak dalo už vyzoušet jestli to volá samostatnýho
+//Dodělat do modelu Player kolik jednotlivec přihodil, udělat funkci check v Hubu a jedem.
+//Pak dělat dál na js. Když se stiskne tlačítko play, zavolá to ReceivePlayMessage pro prvního, co vždycky bude host
+
 namespace Pokerweb.Pages
 {
     public class GamePageModel : PageModel

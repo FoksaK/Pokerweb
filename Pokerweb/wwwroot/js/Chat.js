@@ -1,29 +1,83 @@
 ﻿"use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-//Disable send button until connection is established
-document.getElementById("sendButton").disabled = true;
+function Hide() {
+    var x = document.getElementsByClassName("Playbuttons")
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+}
 
-connection.on("ReceiveMessage", function (user, message) {
-    var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    var encodedMsg = user + " says " + msg;
-    var li = document.createElement("li");
-    li.textContent = encodedMsg;
-    document.getElementById("messagesList").appendChild(li);
-});
+window.onload = function () {
 
-connection.start().then(function () {
-    document.getElementById("sendButton").disabled = false;
-}).catch(function (err) {
-    return console.error(err.toString());
-});
+    var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-document.getElementById("sendButton").addEventListener("click", function (event) {
-    var user = document.getElementById("userInput").value;
-    var message = document.getElementById("messageInput").value;
-    connection.invoke("SendMessage", user, message).catch(function (err) {
-        return console.error(err.toString());
+    connection.on("ShowPlayButton", function () {
+        document.getElementById("PlayButton").style.display = "Block";
     });
-    event.preventDefault();
-});
+
+    connection.on("ReceiveMessage", function () {
+        $(function () {
+          $('#grid').load('/GamePage?handler=PlayersPartial')
+        })
+    });
+
+    connection.on("ReceivePlayMessage", function () {
+        var x = document.getElementsByClassName("Playbuttons")
+        var i;
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "inline";
+        }
+    });
+
+    connection.start().then(function () {
+        connection.invoke("Connected", document.getElementById("key").innerHTML, document.getElementById("name").innerHTML).catch(function (err) {
+            return console.error(err.toString());
+            });
+        }).catch(function (err) {
+            return console.error(err.toString());
+    });
+
+
+    document.getElementById("Fold").addEventListener("click", function (event) {
+        connection.invoke("FoldMessage", document.getElementById("key").innerHTML,
+            document.getElementById("name").innerHTML)
+            .catch(function (err) {return console.error(err.toString());
+            });
+        Hide();
+        event.preventDefault();
+    });
+
+    document.getElementById("Check").addEventListener("click", function (event) {
+        connection.invoke("CheckMessage", document.getElementById("key").innerHTML,
+            document.getElementById("name").innerHTML)
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
+        Hide();
+        event.preventDefault();
+    });
+
+    document.getElementById("Raise").addEventListener("click", function (event) {
+        connection.invoke("RaiseMessage", document.getElementById("key").innerHTML,
+            document.getElementById("name").innerHTML, document.getElementById("demo").innerHTML)//problém se sliderem
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
+        Hide();
+        event.preventDefault();
+    });
+
+    document.getElementById("PlayButton").addEventListener("click", function (event) {
+        connection.invoke("PlayMessage", document.getElementById("key").innerHTML,
+            document.getElementById("name").innerHTML)
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
+        event.preventDefault();
+
+        document.getElementById("PlayButton").style.display = "none";
+    });
+
+};
