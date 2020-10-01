@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.EntityFrameworkCore;
 using Pokerweb.Data;
 using Pokerweb.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Pokerweb.Pages
 {
     public class IndexModel : PageModel
     {
-        
+
 
         public void OnGet()
         {
@@ -69,7 +64,7 @@ namespace Pokerweb.Pages
                 Message = "Incorrect këy";
                 return Page();
             }
-            
+
 
             if (Ks.Length == 6 && IsInDatabase(K) == true && N.Length > 0 && N.Length < 50 && (AlreadyUsed(K, N) == false))
             {
@@ -92,9 +87,9 @@ namespace Pokerweb.Pages
             {
                 return true;
             }
-            else 
+            else
             {
-                return false; 
+                return false;
             }
         }
 
@@ -102,7 +97,7 @@ namespace Pokerweb.Pages
         {
             var Rand = new Random();
             k = 0;
-            for(int i=0; i<6; i++)
+            for (int i = 0; i < 6; i++)
             {
                 k = k * 10 + Rand.Next(0, 10);
             }

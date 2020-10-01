@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 
 namespace Pokerweb.Models
 {
     public class Room
     {
+        public int Round { get; set; } = 0;
+        public int Last { get; set; }
         public int KeyNumber { get; set; }
         public List<Player> Players { get; set; }
         public List<string> Cards { get; set; }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Pokerweb.Data;
-using Pokerweb.Hubs;
 using Pokerweb.Models;
 
 
@@ -36,12 +31,12 @@ namespace Pokerweb.Pages
 
         public Room _Room { get; set; }
 
-       
+
 
         public PartialViewResult OnGetPlayersPartial()
         {
 
-           _Room = RoomsDbContext.RoomsList[0];
+            _Room = RoomsDbContext.RoomsList[0];
             PartialViewResult _resultPartialPage = new PartialViewResult()
             {
                 ViewName = "_PlayersPartial",
