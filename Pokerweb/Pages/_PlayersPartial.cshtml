@@ -3,12 +3,21 @@
 
 <h3>@Model.Sum</h3>
 
+@Model.Round;
+
+
+
 <table class="table table-striped">
     @foreach (var player in Model.Players)
     {
+
+        int Money = -player.Money;
+
+
         <tr>
             <td>@player.PlayerName</td>
-            <td>@player.Money</td>
+            <td>@Money</td>
+            <td>@player.MoneyFinal</td>
             <td>@player.Adress</td>
         </tr>
     }

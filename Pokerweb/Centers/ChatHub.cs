@@ -23,21 +23,24 @@ namespace Pokerweb.Hubs
 
         public void PlayMessage(string _key, string username)
         {
-            bool next = true;
             int key = Convert.ToInt32(_key);
 
-            //NewRound(key, username, out next);
+            int i = PlaySignal(username, key);
 
-            if (next == true)
+            
+
+            if (NewRoundIsNext(key, i, RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players.FindIndex(x => x.PlayerName == username)))
             {
 
-                PlaySignal(username, key);
+                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[i].Played = true;
 
+                Clients.Client(RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[i].Adress).SendAsync("ReceivePlayMessage");
 
-                 foreach (var x in RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players)
-                 {
-                    Clients.Client(x.Adress).SendAsync("ReceiveMessage");
-                 }
+            }
+
+            foreach (var x in RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players)
+            {
+            Clients.Client(x.Adress).SendAsync("ReceiveMessage");
             }
         }
 
@@ -80,8 +83,6 @@ namespace Pokerweb.Hubs
 
         private int MoneyToCheck(int key, string username)
         {
-            // nějak udělat aby previous nebyl foldnutej hráč
-
             int previous = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Last;
             int lenght = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players.Count;
 
@@ -95,26 +96,35 @@ namespace Pokerweb.Hubs
             //zdeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
         }
         
-        /*
-        public void NewRound(int key, string name, out bool next)
+        //dodělat aby to pracovalo jen pokud má další hráč played = true
+        public bool NewRoundIsNext(int key, int i, int y)
         {
-            RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Round++;
-
-            int i = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Round;
-
-            if (i >= 4)
+            if (((RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[i].Money) 
+                == (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[y].Money))
+                && (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[i].Played == true))
             {
-                //GameEnded(0);
-                next = false;
-            }
-            else
-            {
-                next = true;
+                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Round++;
+
+                foreach ( var x in RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players)
+                {
+                    x.Played = false;
+                }
             }
 
-        }*/
+            int z = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Round;
+
+            if (z >= 4)
+            {
+                GameEnded(0);
+
+                return false;
+            }
+
+            return true;
+            
+        }
         
-        void PlaySignal(string username, int key)
+        public int PlaySignal(string username, int key)
         {
 
             int index = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players.FindIndex(x => x.PlayerName == username) + 1;
@@ -157,13 +167,11 @@ namespace Pokerweb.Hubs
                     {
                         index = 0;
                     }
-
-                    Clients.Client(RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[index].Adress).SendAsync("ReceivePlayMessage");
-
-
                 }
 
             }
+
+            return index;
         }
 
     }
