@@ -36,9 +36,8 @@ namespace Pokerweb.Pages
 
             if (N.Length > 0 && N.Length < 50)
             {
-                List<Player> P = new List<Player>();
-                P.Add(new Player { PlayerName = N });
-                RoomsDbContext.RoomsList.Add(new Room { KeyNumber = Key, Players = P });
+                RoomsDbContext.RoomsList.Add(new Room { KeyNumber = Key });
+                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == Key).AddPlayer(new Player { PlayerName = N, Founder = true });
                 return RedirectToPage("GamePage", new { key = Key, name = N });
             }
             else
@@ -68,7 +67,7 @@ namespace Pokerweb.Pages
 
             if (Ks.Length == 6 && IsInDatabase(K) == true && N.Length > 0 && N.Length < 50 && (AlreadyUsed(K, N) == false))
             {
-                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).Players.Add(new Player { PlayerName = N });
+                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).AddPlayer(new Player { PlayerName = N });
 
                 return RedirectToPage("GamePage", new { key = K, name = N });
             }

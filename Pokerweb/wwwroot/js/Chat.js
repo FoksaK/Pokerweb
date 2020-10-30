@@ -19,7 +19,10 @@ window.onload = function () {
 
     connection.on("ReceiveMessage", function () {
         $(function () {
-          $('#grid').load('/GamePage?handler=PlayersPartial')
+            $('#grid').load('/GamePage/PlayersPartial?key=' +
+                document.getElementById("key").innerHTML +
+                "&name=" + 
+                document.getElementById("name").innerHTML)
         })
     });
 
@@ -41,37 +44,37 @@ window.onload = function () {
 
 
     document.getElementById("Fold").addEventListener("click", function (event) {
+        Hide();
         connection.invoke("FoldMessage", document.getElementById("key").innerHTML,
             document.getElementById("name").innerHTML)
             .catch(function (err) {return console.error(err.toString());
             });
-        Hide();
+        
         event.preventDefault();
     });
 
     document.getElementById("Check").addEventListener("click", function (event) {
+        Hide();
         connection.invoke("CheckMessage", document.getElementById("key").innerHTML,
             document.getElementById("name").innerHTML)
             .catch(function (err) {
                 return console.error(err.toString());
             });
-        Hide();
         event.preventDefault();
     });
 
     document.getElementById("Raise").addEventListener("click", function (event) {
+        Hide();
         connection.invoke("RaiseMessage", document.getElementById("key").innerHTML,
             document.getElementById("name").innerHTML, document.getElementById("demo").innerHTML)//problém se sliderem
             .catch(function (err) {
                 return console.error(err.toString());
             });
-        Hide();
         event.preventDefault();
     });
 
     document.getElementById("PlayButton").addEventListener("click", function (event) {
-        connection.invoke("PlayMessage", document.getElementById("key").innerHTML,
-            document.getElementById("name").innerHTML)
+        connection.invoke("StartMessage", document.getElementById("key").innerHTML)
             .catch(function (err) {
                 return console.error(err.toString());
             });

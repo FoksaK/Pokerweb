@@ -1,11 +1,24 @@
 ﻿@using Pokerweb.Models
 @model Room
 
-<h3>@Model.Sum</h3>
+@if (Model.Winners.Count > 0)
+{
+    <h1>@Model.Winners[0]</h1>
+}
 
-@Model.Round;
+<h3>Celkový příhoz: @Model.Sum</h3>
 
+<h2>kolo: @Model.Round</h2>
 
+<h2>Timestamp: @Model.TimeStamp.ToString()</h2>
+
+<h2>Karty místonsti:</h2>
+@for (int i = 0; i < Model.Round + 2; i++)
+{
+    <p>@Model.Cards[i]</p>
+}
+
+<h2>Hráči:</h2>
 
 <table class="table table-striped">
     @foreach (var player in Model.Players)
@@ -18,7 +31,13 @@
             <td>@player.PlayerName</td>
             <td>@Money</td>
             <td>@player.MoneyFinal</td>
-            <td>@player.Adress</td>
+            <td>@player.Founder</td>
+            <td>@player.Played</td>
         </tr>
     }
 </table>
+
+<h2>Karty hráče:</h2>
+
+<p>@Model.Players.Find(x => x.PlayerName == Model.PagePartialHelper).Cards[0] Hrace</p>
+<p>@Model.Players.Find(x => x.PlayerName == Model.PagePartialHelper).Cards[1] Hrace</p>

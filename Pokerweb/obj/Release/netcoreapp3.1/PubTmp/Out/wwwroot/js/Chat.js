@@ -19,7 +19,7 @@ window.onload = function () {
 
     connection.on("ReceiveMessage", function () {
         $(function () {
-          $('#grid').load('/GamePage?handler=PlayersPartial')
+            $('#grid').load('/GamePage/PlayersPartial?key=' + document.getElementById("key").innerHTML)
         })
     });
 
@@ -70,8 +70,7 @@ window.onload = function () {
     });
 
     document.getElementById("PlayButton").addEventListener("click", function (event) {
-        connection.invoke("PlayMessage", document.getElementById("key").innerHTML,
-            document.getElementById("name").innerHTML)
+        connection.invoke("StartMessage", document.getElementById("key").innerHTML)
             .catch(function (err) {
                 return console.error(err.toString());
             });
