@@ -7,14 +7,12 @@ using System;
 using System.Collections.Generic;
 
 /// <summary>
-/// předělat playsignal()
-/// oddělit kola - opakování kol, konce her
-/// Vyřešit, aby byl vždycky k uživateli s přístupem jen jeden člověk. 
+/// Udělat měnnost playerspartialu v závislosti na list<string> winners, zároveň zavést kdo hraje a ukládáni karet.
+/// Vyřešit, aby byl vždycky k uživateli s přístupem jen jeden člověk, udělat autorizaci 
 /// Dodělat css a základ grafiky. Na login použít bootstrap, na zbytek asi taky nějaký tabulkový, float left zobrazení.
-/// Vyřešit, že se někdy nezaznamenával příhoz při raise.
 /// Měnění názvu tlačítek při hře.
 /// Omezení při připojení hráče - zákaz když ingame == true a když je hráčů nad 12
-/// Bot na mazání v DB, kde bude timstamp velký
+/// Bot na mazání v DB, kde bude timestamp velký
 /// </summary>
 
 namespace Pokerweb.Pages

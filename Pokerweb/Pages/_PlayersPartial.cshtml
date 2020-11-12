@@ -3,8 +3,14 @@
 
 @if (Model.Winners.Count > 0)
 {
-    <h1>@Model.Winners[0]</h1>
+    foreach (string x in Model.Winners)
+    {
+        <h1>@x</h1>
+    }
+
+    <h1 style="color: red; font-size: larger">Případ konce = @Model.endedCase.ToString() </h1>
 }
+
 
 <h3>Celkový příhoz: @Model.Sum</h3>
 
@@ -33,6 +39,7 @@
             <td>@player.MoneyFinal</td>
             <td>@player.Founder</td>
             <td>@player.Played</td>
+            <td>In: @player.InGame</td>
         </tr>
     }
 </table>

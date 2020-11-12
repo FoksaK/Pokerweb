@@ -248,25 +248,25 @@ Tento soubor je používán procesem publikování nebo balení webového projek
       <publishTime>12/09/2019 17:08:36</publishTime>
     </File>
     <File Include="Pokerweb.deps.json">
-      <publishTime>10/28/2020 21:07:13</publishTime>
+      <publishTime>11/12/2020 22:03:40</publishTime>
     </File>
     <File Include="Pokerweb.dll">
-      <publishTime>10/28/2020 21:07:07</publishTime>
+      <publishTime>11/12/2020 22:03:36</publishTime>
     </File>
     <File Include="Pokerweb.exe">
-      <publishTime>10/28/2020 21:07:07</publishTime>
+      <publishTime>11/12/2020 22:03:36</publishTime>
     </File>
     <File Include="Pokerweb.pdb">
-      <publishTime>10/28/2020 21:07:07</publishTime>
+      <publishTime>11/12/2020 22:03:36</publishTime>
     </File>
     <File Include="Pokerweb.runtimeconfig.json">
       <publishTime>01/10/2020 22:29:33</publishTime>
     </File>
     <File Include="Pokerweb.Views.dll">
-      <publishTime>10/28/2020 21:07:08</publishTime>
+      <publishTime>11/12/2020 22:03:38</publishTime>
     </File>
     <File Include="Pokerweb.Views.pdb">
-      <publishTime>10/28/2020 21:07:08</publishTime>
+      <publishTime>11/12/2020 22:03:38</publishTime>
     </File>
     <File Include="pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>12/09/2019 17:09:00</publishTime>
@@ -329,19 +329,19 @@ Tento soubor je používán procesem publikování nebo balení webového projek
       <publishTime>08/15/2019 18:14:28</publishTime>
     </File>
     <File Include="runtimes/win-arm64/native/sni.dll">
-      <publishTime>12/07/2017 11:24:24</publishTime>
+      <publishTime>07/12/2017 11:24:24</publishTime>
     </File>
     <File Include="runtimes/win-x64/native/e_sqlite3.dll">
       <publishTime>08/15/2019 18:13:54</publishTime>
     </File>
     <File Include="runtimes/win-x64/native/sni.dll">
-      <publishTime>12/07/2017 11:24:22</publishTime>
+      <publishTime>07/12/2017 11:24:22</publishTime>
     </File>
     <File Include="runtimes/win-x86/native/e_sqlite3.dll">
       <publishTime>08/15/2019 18:13:34</publishTime>
     </File>
     <File Include="runtimes/win-x86/native/sni.dll">
-      <publishTime>12/07/2017 11:24:22</publishTime>
+      <publishTime>07/12/2017 11:24:22</publishTime>
     </File>
     <File Include="runtimes/win/lib/netcoreapp2.0/System.Runtime.Caching.dll">
       <publishTime>05/15/2018 13:29:40</publishTime>
@@ -413,10 +413,10 @@ Tento soubor je používán procesem publikování nebo balení webového projek
       <publishTime>12/09/2019 17:08:36</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>10/28/2020 21:07:13</publishTime>
+      <publishTime>11/12/2020 22:03:40</publishTime>
     </File>
     <File Include="wwwroot/js/Chat.js">
-      <publishTime>10/28/2020 20:26:04</publishTime>
+      <publishTime>10/30/2020 18:52:01</publishTime>
     </File>
     <File Include="wwwroot/js/signalr/dist/browser/signalr.js">
       <publishTime>09/18/2020 21:05:51</publishTime>

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Pokerweb.Data;
 using Pokerweb.Models;
 using System;
-using System.Collections.Generic;
 
 namespace Pokerweb.Pages
 {
@@ -13,9 +12,8 @@ namespace Pokerweb.Pages
 
         public void OnGet()
         {
+
         }
-
-
 
 
         [BindProperty]
@@ -30,7 +28,8 @@ namespace Pokerweb.Pages
 
         public IActionResult OnPostNew()
         {
-            GenerateKey(out Key);
+            Random random = new Random();
+            Key = random.Next(100000, 999999);
 
             string N = Request.Form[nameof(NameIn)];
 
@@ -38,6 +37,9 @@ namespace Pokerweb.Pages
             {
                 RoomsDbContext.RoomsList.Add(new Room { KeyNumber = Key });
                 RoomsDbContext.RoomsList.Find(x => x.KeyNumber == Key).AddPlayer(new Player { PlayerName = N, Founder = true });
+
+                RoomsDbContext.DBFunction();
+
                 return RedirectToPage("GamePage", new { key = Key, name = N });
             }
             else
@@ -60,12 +62,14 @@ namespace Pokerweb.Pages
             }
             else
             {
-                Message = "Incorrect këy";
+                Message = "Vadnej klíč";
                 return Page();
             }
 
 
-            if (Ks.Length == 6 && IsInDatabase(K) == true && N.Length > 0 && N.Length < 50 && (AlreadyUsed(K, N) == false))
+            if ((Ks.Length == 6 && IsInDatabase(K) == true && N.Length > 0) && (N.Length < 50 && (AlreadyUsed(K, N) == false))
+                && (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).InGame == false) 
+                && (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).Players.Count < 12))
             {
                 RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).AddPlayer(new Player { PlayerName = N });
 
@@ -73,7 +77,7 @@ namespace Pokerweb.Pages
             }
             else
             {
-                Message = "Incorrect këy, nebo badný jméno";
+                Message = "Vadnej klíč, nebo jméno, nebo možná ve hře, možná příliš hráčů";
                 return Page();
             }
 
@@ -89,16 +93,6 @@ namespace Pokerweb.Pages
             else
             {
                 return false;
-            }
-        }
-
-        private void GenerateKey(out int k)
-        {
-            var Rand = new Random();
-            k = 0;
-            for (int i = 0; i < 6; i++)
-            {
-                k = k * 10 + Rand.Next(0, 10);
             }
         }
 

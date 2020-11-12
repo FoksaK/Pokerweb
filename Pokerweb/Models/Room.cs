@@ -9,7 +9,7 @@ namespace Pokerweb.Models
         public Room()
         {
             List<string> barva = new List<string>() { "kr_", "sr_", "ka_", "pi_" };
-            List<string> hodnota = new List<string>() { "1","2","3","4","5","6","7","8","9","10", "j", "q", "k"};
+            List<string> hodnota = new List<string>() {"02","03","04","05","06","07","08","09","10","11","12","13","14"};
 
             foreach (string b in barva)
             {
@@ -30,15 +30,17 @@ namespace Pokerweb.Models
 
         //properties
         public List<Player> Players = new List<Player>();
+        public int presetMoney { get; set; } = 300;
         public List<string> Winners { get; set; } = new List<string>();
         public Queue<string> Packet { get; set; }
         public int Round { get; set; } = 0;
-        public int Last { get; set; }
+        public int Last { get; set; } = 0;
         public int KeyNumber { get; set; }
         public List<string> Cards { get; set; }
         public bool InGame { get; set; }
         public DateTime TimeStamp { get; set; } = DateTime.UtcNow;
         public string PagePartialHelper { get; set; }
+        public int endedCase { get; set; } = 1;
         public int Sum { 
             get
             {
@@ -67,6 +69,15 @@ namespace Pokerweb.Models
 
             Cards = GetChunk(5);
 
+            if (InGame == false)
+            {
+                foreach (Player player in Players)
+                {
+                    player.LastMoney = presetMoney;
+                    player.NonFailed = true;
+                }
+            }
+
             foreach (Player player in Players)
             {
                 if (!Winners.Contains(player.PlayerName))
@@ -77,7 +88,7 @@ namespace Pokerweb.Models
                 player.Cards = GetChunk(2);
                 player.Money = 0;
                 player.Played = false;
-                player.InGame = true;
+                player.InGame = player.NonFailed;
             }
 
             Winners.Clear();
