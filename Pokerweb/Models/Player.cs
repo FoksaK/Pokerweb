@@ -14,6 +14,7 @@ namespace Pokerweb.Models
         public List<string> Cards { get; set; }
         public bool InGame { get; set; } = true;
         public bool NonFailed { get; set; } = true;
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty;
+        public bool Left { get; set; } = true;
     }
 }

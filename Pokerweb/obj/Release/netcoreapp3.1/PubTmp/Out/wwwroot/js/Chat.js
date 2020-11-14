@@ -83,4 +83,9 @@ window.onload = function () {
         document.getElementById("PlayButton").style.display = "none";
     });
 
+    window.onunload = function () {
+        connection.invoke("LeaveMessage", document.getElementById("key").innerHTML,
+            document.getElementById("name").innerHTML)
+    };
+ 
 };

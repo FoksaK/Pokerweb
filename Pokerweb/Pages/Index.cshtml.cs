@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Pokerweb.Data;
 using Pokerweb.Models;
 using System;
+using System.Text.RegularExpressions;
 
 namespace Pokerweb.Pages
 {
@@ -33,7 +34,10 @@ namespace Pokerweb.Pages
 
             string N = Request.Form[nameof(NameIn)];
 
-            if (N.Length > 0 && N.Length < 50)
+            Regex rgx = new Regex("^[a-zA-Z0-9_]*$");
+            bool isOk = rgx.IsMatch(N);
+
+            if ((N.Length > 0) && (N.Length < 50) && isOk)
             {
                 RoomsDbContext.RoomsList.Add(new Room { KeyNumber = Key });
                 RoomsDbContext.RoomsList.Find(x => x.KeyNumber == Key).AddPlayer(new Player { PlayerName = N, Founder = true });
@@ -42,13 +46,24 @@ namespace Pokerweb.Pages
 
                 return RedirectToPage("GamePage", new { key = Key, name = N });
             }
-            else
+            else if (!(N.Length > 0))
             {
-                Message = "Vadný jméno";
+                Message = "jméno musí být zadáno";
 
                 return Page();
             }
+            else if (N.Length > 50)
+            {
+                Message = "jméno musí být kratší 50 znaků";
 
+                return Page();
+            }
+            else
+            {
+                Message = "jméno musí obsahovat pouze písmena, čislice a _";
+
+                return Page();
+            }
         }
         public IActionResult OnPostIn()
         {
@@ -56,32 +71,76 @@ namespace Pokerweb.Pages
             string N = Request.Form[nameof(NameIn)];
             int K;
 
-            if (Ks.Length == 6)
+            Regex rgx = new Regex("^[a-zA-Z0-9_]*$");
+            bool isOk = rgx.IsMatch(N);
+
+            Regex rgxNum = new Regex("^[0-9]*$");
+            bool isNum = rgxNum.IsMatch(Ks);
+
+
+            //is key correct?
+            if (!isNum)
+            {
+                Message = "Klíč musí být číslo";
+                return Page();
+            }
+            else if (Ks.Length == 6)
             {
                 K = Convert.ToInt32(Ks);
             }
-            else
+            else if (Ks.Length == 0)
             {
-                Message = "Vadnej klíč";
+                Message = "Klíč musí být zadán";
                 return Page();
-            }
-
-
-            if ((Ks.Length == 6 && IsInDatabase(K) == true && N.Length > 0) && (N.Length < 50 && (AlreadyUsed(K, N) == false))
-                && (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).InGame == false) 
-                && (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).Players.Count < 12))
-            {
-                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).AddPlayer(new Player { PlayerName = N });
-
-                return RedirectToPage("GamePage", new { key = K, name = N });
             }
             else
             {
-                Message = "Vadnej klíč, nebo jméno, nebo možná ve hře, možná příliš hráčů";
+                Message = "Klíč musí mít 6 míst";
                 return Page();
             }
 
+            //is name correct?
+            if (!(N.Length > 0))
+            {
+                Message = "jméno musí být zadáno";
+                return Page();
+            }
+            else if (N.Length > 50)
+            {
+                Message = "jméno musí být kratší 50 znaků";
+                return Page();
+            }
+            else if (!isOk)
+            {
+                Message = "jméno musí obsahovat pouze písmena, čislice a _";
+                return Page();
+            }
 
+            //is interaction with room correct?
+            if (IsInDatabase(K) != true)
+            {
+                Message = "klíč neexistuje";
+                return Page();
+            }
+            else if (AlreadyUsed(K, N) != false)
+            {
+                Message = "jméno již bylo použito";
+                return Page();
+            }
+            else if (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).InGame != false)
+            {
+                Message = "místonst je ve hře";
+                return Page();
+            }
+            else if (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).Players.Count > 12)
+            {
+                Message = "místonst je už plně obsazena";
+                return Page();
+            }
+
+            RoomsDbContext.RoomsList.Find(x => x.KeyNumber == K).AddPlayer(new Player { PlayerName = N });
+
+            return RedirectToPage("GamePage", new { key = K, name = N });
         }
 
         private bool AlreadyUsed(int K, string N)

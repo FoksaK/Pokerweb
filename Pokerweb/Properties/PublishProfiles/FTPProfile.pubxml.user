@@ -248,25 +248,25 @@ Tento soubor je používán procesem publikování nebo balení webového projek
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
     <File Include="Pokerweb.deps.json">
-      <publishTime>11/12/2020 22:33:50</publishTime>
+      <publishTime>11/14/2020 19:00:24</publishTime>
     </File>
     <File Include="Pokerweb.dll">
-      <publishTime>11/12/2020 22:33:46</publishTime>
+      <publishTime>11/14/2020 18:58:29</publishTime>
     </File>
     <File Include="Pokerweb.exe">
-      <publishTime>11/12/2020 22:33:46</publishTime>
+      <publishTime>11/14/2020 18:58:30</publishTime>
     </File>
     <File Include="Pokerweb.pdb">
-      <publishTime>11/12/2020 22:33:46</publishTime>
+      <publishTime>11/14/2020 18:58:29</publishTime>
     </File>
     <File Include="Pokerweb.runtimeconfig.json">
       <publishTime>10/01/2020 22:29:33</publishTime>
     </File>
     <File Include="Pokerweb.Views.dll">
-      <publishTime>11/12/2020 22:33:47</publishTime>
+      <publishTime>11/14/2020 19:00:20</publishTime>
     </File>
     <File Include="Pokerweb.Views.pdb">
-      <publishTime>11/12/2020 22:33:47</publishTime>
+      <publishTime>11/14/2020 19:00:20</publishTime>
     </File>
     <File Include="pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:09:00</publishTime>
@@ -413,10 +413,10 @@ Tento soubor je používán procesem publikování nebo balení webového projek
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>11/12/2020 22:33:50</publishTime>
+      <publishTime>11/14/2020 19:00:24</publishTime>
     </File>
     <File Include="wwwroot/js/Chat.js">
-      <publishTime>10/30/2020 18:52:01</publishTime>
+      <publishTime>11/14/2020 18:44:12</publishTime>
     </File>
     <File Include="wwwroot/js/signalr/dist/browser/signalr.js">
       <publishTime>09/18/2020 21:05:51</publishTime>

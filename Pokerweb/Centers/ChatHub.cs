@@ -3,8 +3,8 @@ using Pokerweb.Data;
 using Pokerweb.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Threading;
 
 namespace Pokerweb.Hubs
 {
@@ -14,8 +14,15 @@ namespace Pokerweb.Hubs
         public void Connected(string key, string username)
         {
             int _key = Convert.ToInt32(key);
+            Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key);
+            Player player = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.PlayerName == username);
 
-            RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.PlayerName == username).Address = Context.ConnectionId;
+            if ((player.Address == string.Empty) || (player.Left == true))
+            {
+                player.Address = Context.ConnectionId;
+                player.Left = false;
+            }
+            
             string addressFounder = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.Founder == true).Address;
 
             foreach (var x in RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players)
@@ -23,7 +30,8 @@ namespace Pokerweb.Hubs
                 Clients.Client(x.Address).SendAsync("ReceiveMessage");
             }
 
-            if (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Count >= 3) 
+
+            if (room.Players.Count >= 3 && !room.InGame) 
             {
                 Clients.Client(addressFounder).SendAsync("ShowPlaybutton");
             }
@@ -129,6 +137,17 @@ namespace Pokerweb.Hubs
             ProcessMoney(_key, username, _money);
 
             PlayMessage(key, username);
+        }
+
+        //on leave
+        public void LeaveMessage(string key, string username)
+        {
+            int _key = Convert.ToInt32(key);
+
+            Player player = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.PlayerName == username);
+
+            player.InGame = false;
+            player.Left = true;
         }
 
         //------------------------------------------ Helping functions ------------------------------------------

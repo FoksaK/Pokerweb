@@ -5,14 +5,12 @@ using Pokerweb.Data;
 using Pokerweb.Models;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// Udělat měnnost playerspartialu v závislosti na list<string> winners, zároveň zavést kdo hraje a ukládáni karet.
-/// Vyřešit, aby byl vždycky k uživateli s přístupem jen jeden člověk, udělat autorizaci 
 /// Dodělat css a základ grafiky. Na login použít bootstrap, na zbytek asi taky nějaký tabulkový, float left zobrazení.
 /// Měnění názvu tlačítek při hře.
-/// Omezení při připojení hráče - zákaz když ingame == true a když je hráčů nad 12
-/// Vyřešit aby to nepadalo na zadávání do políček
 /// </summary>
 
 namespace Pokerweb.Pages
@@ -24,11 +22,42 @@ namespace Pokerweb.Pages
         public Room Room { get; set; }
         public Player Player { get; set; }
 
-        public void OnGet(string key, string name)
+        public IActionResult OnGet(string key, string name)
         {
-            Key = Convert.ToInt32(key);
+            Regex rgxNum = new Regex("^[0-9]*$");
+            bool isNum = rgxNum.IsMatch(key);
+
             Name = name;
-            Player = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == Key).Players.Find(x => x.PlayerName == name);
+            Player player;
+
+            if (isNum)
+            {
+                Key = Convert.ToInt32(key);
+            }
+            else
+            {
+                return RedirectToPage("Index");
+            }
+
+            if (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == Key) != null)
+            {
+                player = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == Key).Players.Find(x => x.PlayerName == name);
+            }
+            else
+            {
+                return RedirectToPage("Index");
+            }
+
+            if (player == null)
+            {
+                return RedirectToPage("Index");
+            }
+            else if (player.Left == false)
+            {
+                return RedirectToPage("Index");
+            }
+
+            return Page();
         }
 
         public PartialViewResult OnGetPlayersPartial(string key, string name)
@@ -45,6 +74,14 @@ namespace Pokerweb.Pages
             return _resultPartialPage;
         }
 
+        public void OnGetClose(string key, string name)
+        {
+            Key = Convert.ToInt32(key);
+            Name = name;
+            Player = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == Key).Players.Find(x => x.PlayerName == name);
+            Player.InGame = false;
+            Player.Left = true;
+        }
 
     }
 }

@@ -3,10 +3,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    @RenderSection("Styles", false)
 </head>
 <body>
-    <div>
-        @RenderBody()
-    </div>
+    @RenderBody()
 </body>
 </html>

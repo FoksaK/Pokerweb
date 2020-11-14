@@ -2,19 +2,24 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model Pokerweb.Pages.IndexModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Poker online";
 }
+@section Styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/IndexStyle.css")" type="text/css" />
+}
+@{Layout = "_Layout.cshtml";}
 
-<h1>Index</h1>
+<div class="container">
+    <h1 class="header">Zahraj si poker online!</h1>
 
-<form method="post">
+    <form method="post" class="form">
 
-    <input type="text" asp-for="NameIn" />
-    <input type="text" asp-for="KeyIn" />
-    <button asp-page-handler="in" class="btn btn-default">In</button>
-    <button asp-page-handler="new" class="btn btn-default">New</button>
+        <input type="text" asp-for="NameIn" />
+        <input type="text" asp-for="KeyIn" />
+        <button asp-page-handler="in" class="btn btn-default">Připoj se</button>
+        <button asp-page-handler="new" class="btn btn-default">Založ místnost</button>
 
-</form>
+    </form>
 
-
-<h3 class="clearfix">@Model.Message</h3>
+    <h3 class="message">@Model.Message</h3>
+</div>
