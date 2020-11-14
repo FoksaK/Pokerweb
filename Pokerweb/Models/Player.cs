@@ -10,10 +10,10 @@ namespace Pokerweb.Models
         public bool Founder { get; set; } = false;
         public int LastMoney { get; set; }
         public int Money { get; set; }
-        public int MoneyFinal { get { return LastMoney + Money; } }
+        public int MoneyFinal { get { return LastMoney - Money; } }
         public List<string> Cards { get; set; }
         public bool InGame { get; set; } = true;
         public bool NonFailed { get; set; } = true;
-        public string Adress { get; set; }
+        public string Address { get; set; }
     }
 }

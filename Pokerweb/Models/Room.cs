@@ -49,7 +49,7 @@ namespace Pokerweb.Models
                 {
                     i += player.Money;
                 }
-                return -i;
+                return i;
             } 
         }
 
@@ -75,6 +75,7 @@ namespace Pokerweb.Models
                 {
                     player.LastMoney = presetMoney;
                     player.NonFailed = true;
+                    player.Money = 0;
                 }
             }
 

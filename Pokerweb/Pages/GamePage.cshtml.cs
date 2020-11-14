@@ -12,7 +12,7 @@ using System.Collections.Generic;
 /// Dodělat css a základ grafiky. Na login použít bootstrap, na zbytek asi taky nějaký tabulkový, float left zobrazení.
 /// Měnění názvu tlačítek při hře.
 /// Omezení při připojení hráče - zákaz když ingame == true a když je hráčů nad 12
-/// Bot na mazání v DB, kde bude timestamp velký
+/// Vyřešit aby to nepadalo na zadávání do políček
 /// </summary>
 
 namespace Pokerweb.Pages

@@ -3,14 +3,13 @@
 
 @if (Model.Winners.Count > 0)
 {
-    foreach (string x in Model.Winners)
+    @foreach (string x in Model.Winners)
     {
         <h1>@x</h1>
+        <h1 style="color: red; font-size: larger">Případ konce = @Model.endedCase.ToString() </h1>
     }
 
-    <h1 style="color: red; font-size: larger">Případ konce = @Model.endedCase.ToString() </h1>
 }
-
 
 <h3>Celkový příhoz: @Model.Sum</h3>
 
@@ -21,7 +20,10 @@
 <h2>Karty místonsti:</h2>
 @for (int i = 0; i < Model.Round + 2; i++)
 {
-    <p>@Model.Cards[i]</p>
+    if (i <= 5)
+    {
+        <p>@Model.Cards[i]</p>
+    }
 }
 
 <h2>Hráči:</h2>
@@ -29,13 +31,9 @@
 <table class="table table-striped">
     @foreach (var player in Model.Players)
     {
-
-        int Money = -player.Money;
-
-
         <tr>
             <td>@player.PlayerName</td>
-            <td>@Money</td>
+            <td>@player.Money</td>
             <td>@player.MoneyFinal</td>
             <td>@player.Founder</td>
             <td>@player.Played</td>

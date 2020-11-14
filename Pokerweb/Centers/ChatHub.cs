@@ -14,16 +14,18 @@ namespace Pokerweb.Hubs
         public void Connected(string key, string username)
         {
             int _key = Convert.ToInt32(key);
-            RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.PlayerName == username).Adress = Context.ConnectionId;
+
+            RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.PlayerName == username).Address = Context.ConnectionId;
+            string addressFounder = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.Founder == true).Address;
 
             foreach (var x in RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players)
             {
-                Clients.Client(x.Adress).SendAsync("ReceiveMessage");
+                Clients.Client(x.Address).SendAsync("ReceiveMessage");
             }
 
             if (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Count >= 3) 
             {
-                Clients.Client(RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.Founder == true).Adress).SendAsync("ShowPlaybutton");
+                Clients.Client(addressFounder).SendAsync("ShowPlaybutton");
             }
             
         }
@@ -50,8 +52,8 @@ namespace Pokerweb.Hubs
             int first = room.Players.FindIndex(x => x.PlayerName == playersInGame[0]);
             int second = room.Players.FindIndex(x => x.PlayerName == playersInGame[1]);
 
-            room.Players[first].Money -= 5;
-            room.Players[second].Money -= 10;
+            room.Players[first].Money = 5;
+            room.Players[second].Money = 10;
 
             room.Players[first].Played = true;
             room.Players[second].Played = true;
@@ -70,13 +72,6 @@ namespace Pokerweb.Hubs
 
             Player player = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players.Find(x => x.PlayerName == username);
 
-            if (player.MoneyFinal < 0)
-            {
-                player.NonFailed = false;
-                player.InGame = false;
-                player.LastMoney = 0;
-            }
-
             int i = Convert.ToInt32(PlaySignal(username, key).Item1);
             bool ended = PlaySignal(username, key).Item2;
 
@@ -85,7 +80,7 @@ namespace Pokerweb.Hubs
             {
                 RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[i].Played = true;
 
-                Clients.Client(RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[i].Adress).SendAsync("ReceivePlayMessage");
+                Clients.Client(RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[i].Address).SendAsync("ReceivePlayMessage");
             }
             else if (ended)
             {
@@ -96,7 +91,7 @@ namespace Pokerweb.Hubs
 
             foreach (var x in RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players)
             {
-            Clients.Client(x.Adress).SendAsync("ReceiveMessage");
+            Clients.Client(x.Address).SendAsync("ReceiveMessage");
             }
         }
 
@@ -114,15 +109,11 @@ namespace Pokerweb.Hubs
         public void CheckMessage(string key, string username)
         {
             int _key = Convert.ToInt32(key);
+            Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key);
 
-            RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.PlayerName == username).Money
-               -= MoneyToCheck(_key, username);
+            ProcessMoney(_key, username);
 
             PlayMessage(key, username);
-
-            RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Last =
-                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.FindIndex(x => x.PlayerName == username);
-
         }
 
         //raise message clicked
@@ -131,27 +122,39 @@ namespace Pokerweb.Hubs
             int _key = Convert.ToInt32(key);
             int _money = Convert.ToInt32(money);
 
-            Player player = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.PlayerName == username);
+            Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key);
 
-            player.Money -= (_money + MoneyToCheck(_key, username));
+            Player player = room.Players.Find(x => x.PlayerName == username);
 
-            RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Last =
-                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.FindIndex(x => x.PlayerName == username);
+            ProcessMoney(_key, username, _money);
 
             PlayMessage(key, username);
-
         }
 
         //------------------------------------------ Helping functions ------------------------------------------
         //get money to check
-        private int MoneyToCheck(int key, string username)
+        private void ProcessMoney(int key, string username, int money = 0)
         {
-            Player actualPlayer = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players.Find(x => x.PlayerName == username);
+            Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key);
+            Player player = room.Players.Find(x => x.PlayerName == username);
             int previous = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Last;
 
-            int forReturn = actualPlayer.Money - RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[previous].Money;
+            int roundChange = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[previous].Money - player.Money;
+            roundChange += money;
 
-            return forReturn;
+            player.Money += roundChange;
+
+            if (player.MoneyFinal < 0)
+            {
+                player.NonFailed = false;
+                player.InGame = false;
+                player.LastMoney = 0;
+                player.Money = 0;
+            }
+            else
+            {
+                room.Last = room.Players.FindIndex(x => x.PlayerName == username);
+            }
         }
 
         //executed when game is ended
@@ -194,12 +197,12 @@ namespace Pokerweb.Hubs
 
             foreach (var x in RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players)
             {
-                Clients.Client(x.Adress).SendAsync("ReceiveMessage");
+                Clients.Client(x.Address).SendAsync("ReceiveMessage");
             }
 
             if (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players.Count >= 3)
             {
-                Clients.Client(RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players.Find(x => x.Founder == true).Adress).SendAsync("ShowPlaybutton");
+                Clients.Client(RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players.Find(x => x.Founder == true).Address).SendAsync("ShowPlaybutton");
             }
         }
 
@@ -213,25 +216,28 @@ namespace Pokerweb.Hubs
         //check if round has ended
         public bool NewRoundIsNext(int key, int i, int y)
         {
+            int z = new int();
+            z = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Round;
+
             if (((RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[i].Money) 
                 == (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[y].Money))
                 && (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[i].Played == true))
             {
-                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Round++;
+                z++;           
+
+                if (z >= 4)
+                {
+                    GameEnded(key, 0);
+
+                    return false;
+                }
+
+                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Round = z;
 
                 foreach ( var x in RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players)
                 {
                     x.Played = false;
                 }
-            }
-
-            int z = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Round;
-
-            if (z >= 4)
-            {
-                GameEnded(key, 0);
-
-                return false;
             }
 
             return true;
@@ -271,7 +277,7 @@ namespace Pokerweb.Hubs
         }
 
         //round evaluating function calling external Evaluation.cs
-        private List<string> EvaluateRound( int key)
+        private List<string> EvaluateRound(int key)
         {
             Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key);
             List<Player> survivors = room.Players.Where(x => x.InGame == true).ToList();
