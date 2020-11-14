@@ -11,6 +11,8 @@ function Hide() {
 
 window.onload = function () {
 
+    var isPlaying = "false";
+
     var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
     connection.on("ShowPlayButton", function () {
@@ -32,6 +34,7 @@ window.onload = function () {
         for (i = 0; i < x.length; i++) {
             x[i].style.display = "inline";
         }
+        isPlaying = "true";
     });
 
     connection.start().then(function () {
@@ -45,6 +48,7 @@ window.onload = function () {
 
     document.getElementById("Fold").addEventListener("click", function (event) {
         Hide();
+        isPlaying = "false";
         connection.invoke("FoldMessage", document.getElementById("key").innerHTML,
             document.getElementById("name").innerHTML)
             .catch(function (err) {return console.error(err.toString());
@@ -55,6 +59,7 @@ window.onload = function () {
 
     document.getElementById("Check").addEventListener("click", function (event) {
         Hide();
+        isPlaying = "false";
         connection.invoke("CheckMessage", document.getElementById("key").innerHTML,
             document.getElementById("name").innerHTML)
             .catch(function (err) {
@@ -65,6 +70,7 @@ window.onload = function () {
 
     document.getElementById("Raise").addEventListener("click", function (event) {
         Hide();
+        isPlaying = "false";
         connection.invoke("RaiseMessage", document.getElementById("key").innerHTML,
             document.getElementById("name").innerHTML, document.getElementById("demo").innerHTML)//problém se sliderem
             .catch(function (err) {
@@ -85,7 +91,7 @@ window.onload = function () {
 
     window.onunload = function () {
         connection.invoke("LeaveMessage", document.getElementById("key").innerHTML,
-            document.getElementById("name").innerHTML)
+            document.getElementById("name").innerHTML, isPlaying)
     };
  
 };

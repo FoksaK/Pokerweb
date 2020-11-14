@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 /// <summary>
 /// Udělat měnnost playerspartialu v závislosti na list<string> winners, zároveň zavést kdo hraje a ukládáni karet.
-/// Dodělat css a základ grafiky. Na login použít bootstrap, na zbytek asi taky nějaký tabulkový, float left zobrazení.
+/// Dodělat css. Asi tabulkový, float left zobrazení.
 /// Měnění názvu tlačítek při hře.
 /// </summary>
 

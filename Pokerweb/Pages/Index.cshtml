@@ -9,15 +9,17 @@
 }
 @{Layout = "_Layout.cshtml";}
 
+<img src="@Url.Content("~/Images/Img/bg.jpg")" id="backGround"/>
+
 <div class="container">
     <h1 class="header">Zahraj si poker online!</h1>
 
     <form method="post" class="form">
 
-        <input type="text" asp-for="NameIn" />
-        <input type="text" asp-for="KeyIn" />
-        <button asp-page-handler="in" class="btn btn-default">Připoj se</button>
-        <button asp-page-handler="new" class="btn btn-default">Založ místnost</button>
+        <input type="text" asp-for="NameIn" class="inp" id="nameInput" placeholder="Jméno"/>
+        <input type="text" asp-for="KeyIn" class="inp" id="keyInput" placeholder="Klíč"/>
+        <button asp-page-handler="in" class="btn" id="inBtn">Připoj se</button>
+        <button asp-page-handler="new" class="btn" id="newBtn">Založ místnost</button>
 
     </form>
 

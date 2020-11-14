@@ -86,6 +86,11 @@ namespace Pokerweb.Models
                     player.LastMoney = player.MoneyFinal;
                 }
 
+                if (player.Left == true)
+                {
+                    player.NonFailed = false;
+                }
+
                 player.Cards = GetChunk(2);
                 player.Money = 0;
                 player.Played = false;

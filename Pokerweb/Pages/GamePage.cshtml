@@ -1,7 +1,13 @@
 ﻿@page "{handler?}"
 @model Pokerweb.Pages.GamePageModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
+@{
+    ViewData["Title"] = "Poker online - hra";
+}
+@section Styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/GameStyle.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/PartialStyle.css")" type="text/css" />
+}
 @{Layout = "_Layout.cshtml";}
 
 

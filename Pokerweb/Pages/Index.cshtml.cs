@@ -34,7 +34,7 @@ namespace Pokerweb.Pages
 
             string N = Request.Form[nameof(NameIn)];
 
-            Regex rgx = new Regex("^[a-zA-Z0-9_]*$");
+            Regex rgx = new Regex("^[a-zA-Z0-9À-ž_]*$");
             bool isOk = rgx.IsMatch(N);
 
             if ((N.Length > 0) && (N.Length < 50) && isOk)
@@ -71,7 +71,7 @@ namespace Pokerweb.Pages
             string N = Request.Form[nameof(NameIn)];
             int K;
 
-            Regex rgx = new Regex("^[a-zA-Z0-9_]*$");
+            Regex rgx = new Regex("^[a-zA-Z0-9À-ž_]*$");
             bool isOk = rgx.IsMatch(N);
 
             Regex rgxNum = new Regex("^[0-9]*$");

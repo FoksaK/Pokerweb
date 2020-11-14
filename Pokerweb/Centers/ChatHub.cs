@@ -140,14 +140,20 @@ namespace Pokerweb.Hubs
         }
 
         //on leave
-        public void LeaveMessage(string key, string username)
+        public void LeaveMessage(string key, string username, string isPlaying)
         {
             int _key = Convert.ToInt32(key);
 
             Player player = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.PlayerName == username);
+            int index = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.FindIndex(x => x.PlayerName == username);
 
             player.InGame = false;
             player.Left = true;
+
+            if(isPlaying == "true")
+            {
+                PlayMessage(key, username);
+            }
         }
 
         //------------------------------------------ Helping functions ------------------------------------------
