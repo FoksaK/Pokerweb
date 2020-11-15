@@ -1,2 +1,152 @@
 ﻿body {
+    overflow: hidden;
+    margin: 0;
+    display:grid;
+    grid-template-rows: auto auto auto;
+    height: 100vh;
+}
+#backGround {
+    min-height: 100%;
+    min-width: 100%;
+    z-index: -1;
+    position: absolute;
+    top:0;
+    left:0;
+}
+#header {
+    width: 100%;
+    height: 60px;
+    padding: 15px;
+    background-color: rgba(91, 99, 159, 0.2);
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto auto auto;
+    justify-items: center;
+    align-items: center;
+    color: white;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.5);
+
+    grid-row:1;
+}
+h2 {
+    font-family: Arial;
+    font-weight: lighter;
+    font-size: 32px;
+    margin: 0;
+    padding: 0;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+h1 {
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 48px;
+    margin: 0;
+    padding: 0;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+#name {
+    grid-column: 1;
+    grid-row: 1;
+    width: auto;
+}
+#key {
+    grid-column: 3;
+    grid-row: 1;
+    width: auto;
+}
+#title {
+    grid-column: 2;
+    grid-row: 1;
+    width: auto;
+}
+#grid {
+    grid-row: 2;
+    height: auto;
+    overflow: auto;
+}
+#controlButtons {
+    width: 100%;
+    text-align: center;
+    grid-row: 3;
+}
+.btn:hover {
+    background-color: white;
+    color: rgba(91, 99, 159, 1.00);
+    margin: 0;
+    border: 3px solid rgba(91, 99, 159, 1.00);
+}
+.btn {
+    background-color: rgba(91, 99, 159, 1.00);
+    color: white;
+    font-size: 32px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    margin: 3px;
+}
+input[type=button], input[type=submit], input[type=reset] {
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+}
+.rangeContainer {
+    width: auto;
+    padding: 15px;
+    opacity: 0.7;
+    -webkit-transition: .4s;
+    transition: opacity .4s;
+}
+
+.rangeContainer:hover {
+    opacity: 1;
+}
+
+#Range {
+    -webkit-appearance: none;
+    width: 250px;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+}
+
+#Range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgb(255, 255, 255);
+    border: 3px solid rgba(91, 99, 159, 1.00);
+    cursor: pointer;
+}
+
+#Range::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgb(255, 255, 255);
+    border: 3px solid rgba(91, 99, 159, 1.00);
+    cursor: pointer;
+}
+.value {
+    font-family: Arial;
+    font-weight: lighter;
+    font-size: 36px;
+    color: #fff;
+    margin:0;
+    margin-top: 15px;
+}
+#PlayButton {
+    background-color: rgb(195, 40, 40);
+    margin-bottom: 15px;
+}
+#PlayButton:hover{
+    background-color: white;
+    border: 3px solid rgb(195, 40, 40);
+    color: rgb(195, 40, 40);
 }

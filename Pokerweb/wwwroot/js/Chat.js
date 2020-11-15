@@ -16,7 +16,7 @@ window.onload = function () {
     var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
     connection.on("ShowPlayButton", function () {
-        document.getElementById("PlayButton").style.display = "Block";
+        document.getElementById("PlayButton").style.display = "inline";
     });
 
     connection.on("ReceiveMessage", function () {

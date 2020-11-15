@@ -10,32 +10,34 @@
 }
 @{Layout = "_Layout.cshtml";}
 
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
 
+<img src="@Url.Content("~/Images/Img/monowoodbg.jpg")" id="backGround" />
 
-<h1>GamePage</h1>
-
-<h2 id="key">@Model.Key</h2>
-<h2 id="name">@Model.Name</h2>
+<div id="header">
+    <h1 id="title">Poker - hra</h1>
+    <h2 id="key">@Model.Key</h2>
+    <h2 id="name">@Model.Name</h2>
+</div>
 
 <div id="grid"></div>
 
-<button class="Playbuttons" id="Fold">Fold</button>
-<button class="Playbuttons" id="Check">Check</button>
-<button class="Playbuttons" id="Raise">Raise</button>
+<div id="controlButtons">
+    <div class="buttonsContainer">
+        <button class="Playbuttons btn" id="Fold">Fold</button>
+        <button class="Playbuttons btn" id="Check">Check</button>
+        <button class="Playbuttons btn" id="Raise">Raise</button>
+    </div>
 
-<input type="range" min="1" max="100" value="50" class="Playbuttons" id="Range">
-<p class="Playbuttons">Value: <span id="demo"></span></p>
+    <div class="rangeContainer">
+        <input type="range" min="0" max="100" value="50" class="Playbuttons" id="Range" step="5">
+        <p class="Playbuttons value"><span id="demo"></span></p>
+    </div>
 
-<button id="PlayButton" style=" display: none; ">Play</button>
-
-
-
+    <button id="PlayButton" class="btn" style=" display: none; ">Hraj</button>
+</div>
 
 <script type="text/javascript">
     var slider = document.getElementById("Range");

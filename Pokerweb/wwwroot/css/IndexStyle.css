@@ -65,7 +65,7 @@ h1 {
 }
 .btn:hover {
     background-color: white;
-    color: black;
+    color: #4CAF50;
     border: 2px solid #4CAF50;
 }
 .inp {
@@ -86,4 +86,5 @@ input[type=text], select {
     border-radius: 4px;
     box-sizing: border-box;
     padding: 8px;
+    border: 2px solid #4CAF50;
 }
