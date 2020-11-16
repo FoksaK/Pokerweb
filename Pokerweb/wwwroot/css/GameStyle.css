@@ -150,3 +150,47 @@ input[type=button], input[type=submit], input[type=reset] {
     border: 3px solid rgb(195, 40, 40);
     color: rgb(195, 40, 40);
 }
+
+/*dfsd*/
+
+.tooltip {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  font-family: Arial;
+  font-size: 16px;
+  width: auto;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  position: absolute;
+  z-index: 1;
+  top: 107%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+  transform: rotate(180deg);
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

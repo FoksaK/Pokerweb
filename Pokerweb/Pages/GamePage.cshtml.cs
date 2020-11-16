@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 /// <summary>
 /// Udělat měnnost playerspartialu v závislosti na list<string> winners, zároveň zavést kdo hraje a ukládáni karet.
-/// Dodělat css. Asi tabulkový, float left zobrazení.
+/// Dodělat css. Pokračovat copy to clipboard při kliknutí na kód, dále PartialStyle.css. Musí to být měnný podle velikosti gridu
 /// Měnění názvu tlačítek při hře.
 /// </summary>
 

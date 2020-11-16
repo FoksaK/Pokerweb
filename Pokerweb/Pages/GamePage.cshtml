@@ -18,7 +18,11 @@
 
 <div id="header">
     <h1 id="title">Poker - hra</h1>
-    <h2 id="key">@Model.Key</h2>
+
+    <div class="tooltip">
+        <h2 id="key" onmouseout="outFunc()">@Model.Key</h2>
+        <span class="tooltiptext" id="myTooltip">Zkopíruj</span>
+    </div>
     <h2 id="name">@Model.Name</h2>
 </div>
 
@@ -47,6 +51,31 @@
     // Update the current slider value (each time you drag the slider handle)
     slider.oninput = function () {
         output.innerHTML = this.value;
+    }
+
+    $("#key").click(function () {
+        myFunction();
+    });
+
+    function myFunction() {
+        var text = document.getElementById("key");
+        var selection = window.getSelection();
+        var range = document.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        //add to clipboard.
+        document.execCommand('copy');
+
+        window.getSelection().removeAllRanges();
+
+        var tooltip = document.getElementById("myTooltip");
+        tooltip.innerHTML = "Zkopírováno";
+    }
+
+    function outFunc() {
+        var tooltip = document.getElementById("myTooltip");
+        tooltip.innerHTML = "Zkopíruj";
     }
 </script>
 
