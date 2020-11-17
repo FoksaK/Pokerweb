@@ -1,8 +1,11 @@
-﻿body {
+﻿html {
+    overflow: hidden;
+}
+body {
     overflow: hidden;
     margin: 0;
     display:grid;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto 160px;
     height: 100vh;
 }
 #backGround {
@@ -20,13 +23,12 @@
     background-color: rgba(91, 99, 159, 0.2);
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 33% 33% 33%;
     justify-items: center;
     align-items: center;
     color: white;
     backdrop-filter: blur(8px);
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.5);
-
     grid-row:1;
 }
 h2 {
@@ -116,7 +118,6 @@ input[type=button], input[type=submit], input[type=reset] {
 
 #Range::-webkit-slider-thumb {
     -webkit-appearance: none;
-    appearance: none;
     width: 25px;
     height: 25px;
     border-radius: 50%;
@@ -125,14 +126,6 @@ input[type=button], input[type=submit], input[type=reset] {
     cursor: pointer;
 }
 
-#Range::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: rgb(255, 255, 255);
-    border: 3px solid rgba(91, 99, 159, 1.00);
-    cursor: pointer;
-}
 .value {
     font-family: Arial;
     font-weight: lighter;
@@ -144,9 +137,55 @@ input[type=button], input[type=submit], input[type=reset] {
 #PlayButton {
     background-color: rgb(195, 40, 40);
     margin-bottom: 15px;
+    margin-top: -100px;
 }
 #PlayButton:hover{
     background-color: white;
     border: 3px solid rgb(195, 40, 40);
     color: rgb(195, 40, 40);
 }
+
+/*dfsd*/
+
+.tooltip {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  font-family: Arial;
+  font-size: 16px;
+  width: auto;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  position: absolute;
+  z-index: 1;
+  top: 107%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+  transform: rotate(180deg);
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+

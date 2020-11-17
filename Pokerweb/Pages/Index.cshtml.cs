@@ -37,7 +37,7 @@ namespace Pokerweb.Pages
             Regex rgx = new Regex("^[a-zA-Z0-9À-ž_]*$");
             bool isOk = rgx.IsMatch(N);
 
-            if ((N.Length > 0) && (N.Length < 50) && isOk)
+            if ((N.Length > 0) && (N.Length < 25) && isOk)
             {
                 RoomsDbContext.RoomsList.Add(new Room { KeyNumber = Key });
                 RoomsDbContext.RoomsList.Find(x => x.KeyNumber == Key).AddPlayer(new Player { PlayerName = N, Founder = true });
@@ -52,9 +52,9 @@ namespace Pokerweb.Pages
 
                 return Page();
             }
-            else if (N.Length > 50)
+            else if (N.Length > 25)
             {
-                Message = "jméno musí být kratší 50 znaků";
+                Message = "jméno musí být kratší 25 znaků";
 
                 return Page();
             }
@@ -105,9 +105,9 @@ namespace Pokerweb.Pages
                 Message = "jméno musí být zadáno";
                 return Page();
             }
-            else if (N.Length > 50)
+            else if (N.Length > 25)
             {
-                Message = "jméno musí být kratší 50 znaků";
+                Message = "jméno musí být kratší 25 znaků";
                 return Page();
             }
             else if (!isOk)

@@ -1,2 +1,25 @@
-﻿body {
+﻿.pCard{
+    height: 150px;
+}
+.rCard {
+    height: 100px;
+}
+#container{
+    text-align: center;
+}
+#pHeading{
+    font-family: Arial;
+    font-weight: lighter;
+}
+#pMoney{
+    font-family:Arial;
+    font-weight:normal;
+}
+#pMoneyFinal {
+    font-family: Arial;
+    font-weight: normal;
+}
+.pContainer{
+    position:absolute;
+    display: none;
 }

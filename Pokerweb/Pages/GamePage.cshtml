@@ -28,6 +28,9 @@
 
 <div id="grid"></div>
 
+<button id="nextCardBtn" class="btn">Další</button>
+<button id="previousCardBtn" class="btn">Předchozí</button>
+
 <div id="controlButtons">
     <div class="buttonsContainer">
         <button class="Playbuttons btn" id="Fold">Fold</button>
@@ -54,10 +57,10 @@
     }
 
     $("#key").click(function () {
-        myFunction();
+        clickFunction();
     });
 
-    function myFunction() {
+    function clickFunction() {
         var text = document.getElementById("key");
         var selection = window.getSelection();
         var range = document.createRange();

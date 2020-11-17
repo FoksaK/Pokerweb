@@ -1,4 +1,8 @@
-﻿body {
+﻿html{
+    overflow: hidden;
+    display: unset;
+}
+body {
     margin: 0;
     overflow: hidden;
 }
@@ -16,7 +20,6 @@
     text-align: center;
     border: 2px solid rgb(128, 128, 128);
     border-radius: 3px;
-    /*dodělat, blur a obrázek na pozadí*/
     background-color: rgba(57, 57, 57, 0.3);
     backdrop-filter: blur(8px);
 }

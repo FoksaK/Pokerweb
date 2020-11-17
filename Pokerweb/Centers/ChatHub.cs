@@ -35,7 +35,6 @@ namespace Pokerweb.Hubs
             {
                 Clients.Client(addressFounder).SendAsync("ShowPlaybutton");
             }
-            
         }
 
         //game start
@@ -78,7 +77,8 @@ namespace Pokerweb.Hubs
         {
             int key = Convert.ToInt32(_key);
 
-            Player player = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players.Find(x => x.PlayerName == username);
+            Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key);
+            Player player = room.Players.Find(x => x.PlayerName == username);
 
             int i = Convert.ToInt32(PlaySignal(username, key).Item1);
             bool ended = PlaySignal(username, key).Item2;
@@ -86,7 +86,9 @@ namespace Pokerweb.Hubs
             if (NewRoundIsNext(key, i, RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players.FindIndex(x => x.PlayerName == username))
                 && !ended)
             {
-                RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[i].Played = true;
+                Player actualPlayer = room.Players[i];
+                actualPlayer.Played = true;
+                room.Playing = actualPlayer.PlayerName;
 
                 Clients.Client(RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players[i].Address).SendAsync("ReceivePlayMessage");
             }

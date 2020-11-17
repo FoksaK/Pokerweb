@@ -35,6 +35,7 @@ namespace Pokerweb.Models
         public Queue<string> Packet { get; set; }
         public int Round { get; set; } = 0;
         public int Last { get; set; } = 0;
+        public string Playing { get; set; }
         public int KeyNumber { get; set; }
         public List<string> Cards { get; set; }
         public bool InGame { get; set; }

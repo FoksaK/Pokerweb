@@ -1,48 +1,70 @@
 ﻿@using Pokerweb.Models
 @model Room
 
-@if (Model.Winners.Count > 0)
-{
-    @foreach (string x in Model.Winners)
-    {
-        <h1>@x</h1>
-        <h1 style="color: red; font-size: larger">Případ konce = @Model.endedCase.ToString() </h1>
-    }
+<div>
 
-}
+    <div id="container">
+        @if (Model.Winners.Count > 0)
+        {
+            
+            foreach (string x in Model.Winners)
+            {
+                <h1>@x</h1>
+                <h1 style="color: red; font-size: larger">Případ konce = @Model.endedCase.ToString() </h1>
+            }
 
-<h3>Celkový příhoz: @Model.Sum</h3>
+        }
 
-<h2>kolo: @Model.Round</h2>
+        <h3>@Model.Sum</h3>
 
-<h2>Timestamp: @Model.TimeStamp.ToString()</h2>
+        @if (Model.Round > 0)
+        {
+            @for (int i = 0; i < Model.Round + 2; i++)
+            {
+                if (i <= 5)
+                {
+                    <img src="@Url.Content("~/Images/Cards/" + Model.Cards[i] + ".png")" class="rCard" />
+                }
+            }
+        }
 
-<h2>Karty místonsti:</h2>
-@for (int i = 0; i < Model.Round + 2; i++)
-{
-    if (i <= 5)
-    {
-        <p>@Model.Cards[i]</p>
-    }
-}
+        @{
+            var thisPlayer = @Model.Players.Find(x => x.PlayerName == Model.PagePartialHelper);
+            int y = 0;
+        }
 
-<h2>Hráči:</h2>
 
-<table class="table table-striped">
-    @foreach (var player in Model.Players)
-    {
-        <tr>
-            <td>@player.PlayerName</td>
-            <td>@player.Money</td>
-            <td>@player.MoneyFinal</td>
-            <td>@player.Founder</td>
-            <td>@player.Played</td>
-            <td>In: @player.InGame</td>
-        </tr>
-    }
-</table>
+        @foreach (var player in Model.Players)
+        {
+            string id = y.ToString();
+            string display = "none";
+            y++;
 
-<h2>Karty hráče:</h2>
+            if (player.PlayerName == Model.Playing)
+            {
+                display = "contents";
+                <p id="actual" style="display:none">@id</p>
+            }
 
-<p>@Model.Players.Find(x => x.PlayerName == Model.PagePartialHelper).Cards[0] Hrace</p>
-<p>@Model.Players.Find(x => x.PlayerName == Model.PagePartialHelper).Cards[1] Hrace</p>
+            <div class="pContainer" id="@id" style="display: @display">
+                <div id="pCards">
+                    @if ((player == thisPlayer) || (Model.Winners.Count > 0))
+                    {
+                        <img src="@Url.Content("~/Images/Cards/" + @player.Cards[0] + ".png")" class="pCard" />
+                        <img src="@Url.Content("~/Images/Cards/" + @player.Cards[1] + ".png")" class="pCard" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Images/Cards/b.png")" class="pCard" />
+                        <img src="@Url.Content("~/Images/Cards/b.png")" class="pCard" />
+                    }
+                </div>
+
+                <h1 id="pHeading">@player.PlayerName</h1>
+                <h2 id="pMoney">@player.Money</h2>
+                <h2 id="pMoneyFinal">@player.MoneyFinal</h2>
+            </div>
+        }
+
+    </div>
+</div>

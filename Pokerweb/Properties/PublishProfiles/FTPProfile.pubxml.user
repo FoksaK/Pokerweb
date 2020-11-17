@@ -248,25 +248,25 @@ Tento soubor je používán procesem publikování nebo balení webového projek
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
     <File Include="Pokerweb.deps.json">
-      <publishTime>11/16/2020 00:19:50</publishTime>
+      <publishTime>11/16/2020 15:55:07</publishTime>
     </File>
     <File Include="Pokerweb.dll">
-      <publishTime>11/15/2020 11:23:29</publishTime>
+      <publishTime>11/16/2020 15:54:22</publishTime>
     </File>
     <File Include="Pokerweb.exe">
-      <publishTime>11/15/2020 11:30:17</publishTime>
+      <publishTime>11/16/2020 15:54:22</publishTime>
     </File>
     <File Include="Pokerweb.pdb">
-      <publishTime>11/15/2020 11:23:29</publishTime>
+      <publishTime>11/16/2020 15:54:22</publishTime>
     </File>
     <File Include="Pokerweb.runtimeconfig.json">
       <publishTime>10/01/2020 22:29:33</publishTime>
     </File>
     <File Include="Pokerweb.Views.dll">
-      <publishTime>11/16/2020 00:14:15</publishTime>
+      <publishTime>11/16/2020 15:54:23</publishTime>
     </File>
     <File Include="Pokerweb.Views.pdb">
-      <publishTime>11/16/2020 00:14:15</publishTime>
+      <publishTime>11/16/2020 15:54:23</publishTime>
     </File>
     <File Include="pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:09:00</publishTime>
@@ -413,16 +413,175 @@ Tento soubor je používán procesem publikování nebo balení webového projek
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>11/16/2020 00:19:50</publishTime>
+      <publishTime>11/16/2020 15:55:07</publishTime>
     </File>
     <File Include="wwwroot/css/GameStyle.css">
-      <publishTime>11/16/2020 00:12:03</publishTime>
+      <publishTime>11/16/2020 15:41:31</publishTime>
     </File>
     <File Include="wwwroot/css/IndexStyle.css">
-      <publishTime>11/15/2020 23:02:13</publishTime>
+      <publishTime>11/16/2020 15:49:17</publishTime>
     </File>
     <File Include="wwwroot/css/PartialStyle.css">
-      <publishTime>11/14/2020 19:11:10</publishTime>
+      <publishTime>11/16/2020 15:16:41</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/b.png">
+      <publishTime>11/05/2020 22:42:20</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_02.png">
+      <publishTime>11/06/2020 22:59:52</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_03.png">
+      <publishTime>11/06/2020 23:00:11</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_04.png">
+      <publishTime>11/06/2020 23:00:28</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_05.png">
+      <publishTime>11/06/2020 23:00:43</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_06.png">
+      <publishTime>11/06/2020 23:01:01</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_07.png">
+      <publishTime>11/06/2020 23:01:21</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_08.png">
+      <publishTime>11/06/2020 23:01:37</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_09.png">
+      <publishTime>11/06/2020 23:01:52</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_10.png">
+      <publishTime>11/06/2020 23:02:23</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_11.png">
+      <publishTime>11/08/2020 14:35:45</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_12.png">
+      <publishTime>11/08/2020 14:38:24</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_13.png">
+      <publishTime>11/08/2020 14:38:54</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/ka_14.png">
+      <publishTime>11/06/2020 09:32:45</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_02.png">
+      <publishTime>11/06/2020 22:47:59</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_03.png">
+      <publishTime>11/06/2020 22:48:26</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_04.png">
+      <publishTime>11/06/2020 22:48:46</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_05.png">
+      <publishTime>11/06/2020 22:49:03</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_06.png">
+      <publishTime>11/06/2020 22:49:17</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_07.png">
+      <publishTime>11/06/2020 22:49:38</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_08.png">
+      <publishTime>11/06/2020 22:50:07</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_09.png">
+      <publishTime>11/06/2020 22:50:29</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_10.png">
+      <publishTime>11/06/2020 22:50:49</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_11.png">
+      <publishTime>11/08/2020 14:36:26</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_12.png">
+      <publishTime>11/08/2020 14:37:46</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_13.png">
+      <publishTime>11/08/2020 14:39:36</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/kr_14.png">
+      <publishTime>11/06/2020 09:31:37</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_02.png">
+      <publishTime>11/06/2020 22:47:09</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_03.png">
+      <publishTime>11/06/2020 22:46:42</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_04.png">
+      <publishTime>11/06/2020 22:46:19</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_05.png">
+      <publishTime>11/06/2020 22:46:01</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_06.png">
+      <publishTime>11/06/2020 22:45:41</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_07.png">
+      <publishTime>11/06/2020 22:45:19</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_08.png">
+      <publishTime>11/06/2020 22:44:59</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_09.png">
+      <publishTime>11/06/2020 22:44:28</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_10.png">
+      <publishTime>11/06/2020 22:43:58</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_11.png">
+      <publishTime>11/08/2020 14:36:02</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_12.png">
+      <publishTime>11/08/2020 14:38:08</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_13.png">
+      <publishTime>11/08/2020 14:39:16</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/pi_14.png">
+      <publishTime>11/06/2020 09:30:30</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_02.png">
+      <publishTime>11/06/2020 22:59:26</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_03.png">
+      <publishTime>11/06/2020 22:59:00</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_04.png">
+      <publishTime>11/06/2020 22:57:45</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_05.png">
+      <publishTime>11/06/2020 22:57:28</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_06.png">
+      <publishTime>11/06/2020 22:56:53</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_07.png">
+      <publishTime>11/06/2020 22:56:37</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_08.png">
+      <publishTime>11/06/2020 22:56:19</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_09.png">
+      <publishTime>11/06/2020 22:56:03</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_10.png">
+      <publishTime>11/06/2020 22:55:05</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_11.png">
+      <publishTime>11/08/2020 14:36:40</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_12.png">
+      <publishTime>11/08/2020 14:40:54</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_13.png">
+      <publishTime>11/08/2020 14:39:52</publishTime>
+    </File>
+    <File Include="wwwroot/Images/Cards/sr_14.png">
+      <publishTime>11/06/2020 09:32:04</publishTime>
     </File>
     <File Include="wwwroot/Images/Img/bg.jpg">
       <publishTime>11/15/2020 09:51:32</publishTime>

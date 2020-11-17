@@ -8,8 +8,10 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 /// <summary>
-/// Udělat měnnost playerspartialu v závislosti na list<string> winners, zároveň zavést kdo hraje a ukládáni karet.
-/// Dodělat css. Pokračovat copy to clipboard při kliknutí na kód, dále PartialStyle.css. Musí to být měnný podle velikosti gridu
+/// Dodělat css. Udělat js posouvání karet hráčů. Jenom měnit display: inline a none. Dále udělat něco na styl razítka s oznámením výsledků.
+/// Nakonec změnit styl názvů věcí na kartácha dát k tomu ikony.
+/// Pak vyřešít overflow:hidden na mobilu a zmenšit fonty a mělo by to být okk.
+/// Hráč by měl vsadit vše, ale nejít pod nulu.
 /// Měnění názvu tlačítek při hře.
 /// </summary>
 

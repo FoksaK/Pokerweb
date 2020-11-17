@@ -9,6 +9,8 @@ function Hide() {
     }
 }
 
+var loaded = false;
+
 window.onload = function () {
 
     var isPlaying = "false";
@@ -23,9 +25,10 @@ window.onload = function () {
         $(function () {
             $('#grid').load('/GamePage/PlayersPartial?key=' +
                 document.getElementById("key").innerHTML +
-                "&name=" + 
+                "&name=" +
                 document.getElementById("name").innerHTML)
         })
+        add();
     });
 
     connection.on("ReceivePlayMessage", function () {
@@ -34,7 +37,6 @@ window.onload = function () {
         for (i = 0; i < x.length; i++) {
             x[i].style.display = "inline";
         }
-        isPlaying = "true";
     });
 
     connection.start().then(function () {
@@ -93,5 +95,70 @@ window.onload = function () {
         connection.invoke("LeaveMessage", document.getElementById("key").innerHTML,
             document.getElementById("name").innerHTML, isPlaying)
     };
- 
+
+    function Next() {
+
+        var x = document.getElementsByClassName("pContainer");
+        var a = document.getElementById("actual");
+        var number = 0;
+
+        var z;
+
+        if (actualCard == null) {
+            number = a.innerHTML + 1;
+        } else {
+            number = actualCard + 1;
+        }
+
+        for (z = 0; z < x.length; z++) {
+            x[z].style.display = "none"
+        }
+
+        if (number >= x.length) {
+            number = 0;
+        }
+        if (number <= x.length && number >= 0) {
+            x[number].style.display = "contents";
+        }
+
+        actualCard = number;
+        
+    }
+
+    function Previous() {
+        var x = document.getElementsByClassName("pContainer");
+        var a = document.getElementById("actual");
+        var number = 0;
+
+        var z;
+
+        if (actualCard == null) {
+            number = a.innerHTML - 1;
+        } else {
+            number = actualCard - 1;
+        }
+
+        for (z = 0; z < x.length; z++) {
+            x[z].style.display = "none"
+        }
+
+        if (number < 0) {
+            number = x.length - 1;
+        }
+        if (number <= x.length && number >= 0) {
+            x[number].style.display = "contents";
+        }
+
+        actualCard = number;
+    }
+
+    var actualCard = null;
+    var x = document.getElementById("nextCardBtn");
+
+    var y = document.getElementById("previousCardBtn");
+
+    function add() {
+        y.onclick = function () { Previous() };
+        x.onclick = function () { Next() };
+    }
 };
