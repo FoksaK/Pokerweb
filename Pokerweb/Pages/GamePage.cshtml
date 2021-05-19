@@ -37,13 +37,15 @@
         <button class="Playbuttons btn" id="Raise">Raise</button>
     </div>
 
+    <button id="PlayButton" class="btn" style=" display: none; ">Hraj</button>
+
     <div class="rangeContainer">
         <input type="range" min="0" max="100" value="50" class="Playbuttons" id="Range" step="5">
         <p class="Playbuttons value"><span id="demo"></span></p>
     </div>
-
-    <button id="PlayButton" class="btn" style=" display: none; ">Hraj</button>
 </div>
+
+<h1 id="waitingText">Čekání na hráče a zahájení hry&#0133;</h1>
 
 <script type="text/javascript">
     var slider = document.getElementById("Range");
@@ -66,6 +68,7 @@
         range.selectNodeContents(text);
         selection.removeAllRanges();
         selection.addRange(range);
+
         //add to clipboard.
         document.execCommand('copy');
 

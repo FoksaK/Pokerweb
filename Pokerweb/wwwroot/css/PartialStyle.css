@@ -51,6 +51,7 @@
     width: 50px;
     margin-left: 10vh;
     margin-right: 10vh;
+    display: none;
 }
 
 #nextCardBtn:focus, #previousCardBtn:focus {
@@ -133,12 +134,12 @@
 
 @keyframes messageAnimation {
     from {
-        transform: translate(-80px, 40px);
+        transform: translate(-120px, 40px);
         opacity: 1;
     }
 
     to {
-        transform: translate(-220px, -10px);
+        transform: translate(-240px, -10px);
         opacity: 0;
     }
 }

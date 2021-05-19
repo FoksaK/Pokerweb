@@ -19,16 +19,20 @@ window.onload = function () {
 
     connection.on("ShowPlayButton", function () {
         document.getElementById("PlayButton").style.display = "inline";
+        document.getElementById("waitingText").style.display = "none";
     });
 
     connection.on("ReceiveMessage", function () {
         $(function () {
-            $('#grid').load('/GamePage/PlayersPartial?key=' +
+            var page = '/GamePage/PlayersPartial?key=' +
                 document.getElementById("key").innerHTML +
                 "&name=" +
-                document.getElementById("name").innerHTML)
+                document.getElementById("name").innerHTML;
+
+            $('#grid').load(page, function () {
+                add();
+            })
         })
-        add();
     });
 
     connection.on("ReceivePlayMessage", function () {
@@ -117,7 +121,8 @@ window.onload = function () {
         if (number >= x.length) {
             number = 0;
         }
-        if (number <= x.length && number >= 0) {
+
+        if ((number <= x.length) && (number >= 0) && (x[number] != null)) {
             x[number].style.display = "block";
             container.classList.remove("slide");
             container.classList.remove("slideReversed");
@@ -150,7 +155,8 @@ window.onload = function () {
         if (number < 0) {
             number = x.length - 1;
         }
-        if (number <= x.length && number >= 0) {
+
+        if ((number <= x.length) && (number >= 0) && (x[number] != null)) {
             x[number].style.display = "block";
             container.classList.remove("slideReversed");
             container.classList.remove("slide");
@@ -159,17 +165,27 @@ window.onload = function () {
         }
 
         actualCard = number;
-
-        
     }
 
     var actualCard = null;
     var x = document.getElementById("nextCardBtn");
-
     var y = document.getElementById("previousCardBtn");
 
     function add() {
         y.onclick = function () { Previous() };
         x.onclick = function () { Next() };
+
+        var inGame = document.getElementById("inGame").innerHTML;
+
+        console.log(inGame);
+
+        if (inGame == "True") {
+            document.getElementById("nextCardBtn").style.display = "block";
+            document.getElementById("previousCardBtn").style.display = "block";
+            document.getElementById("waitingText").style.display = "none";
+        } else {
+            document.getElementById("nextCardBtn").style.display = "none";
+            document.getElementById("previousCardBtn").style.display = "none";
+        }
     }
 };

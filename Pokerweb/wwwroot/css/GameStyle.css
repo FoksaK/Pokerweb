@@ -194,3 +194,14 @@ input[type=button], input[type=submit], input[type=reset] {
 #grid {
     height: 60vh;
 }
+
+#waitingText {
+    font-family: Arial;
+    font-size: 46px;
+    font-weight: bold;
+    color: rgb(195, 40, 40);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

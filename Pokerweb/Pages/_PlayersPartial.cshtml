@@ -18,6 +18,8 @@
                         else
                         {
                             <h1 class="winMessage"><b>@Model.Winners[0]</b> vyhrál!</h1>
+
+                            <h3 id="sum">@Model.Sum</h3>
                         }
                     }
                     else
@@ -42,7 +44,9 @@
                             }
                         }
 
-                        <h1 class="winMessage"><b>@result</b> vyhrál!</h1>
+                        <h1 class="winMessage"><b>@result</b> vyhráli!</h1>
+
+                        <h3 id="sum">@Model.Sum</h3>
                     }
 
                     <div class="cardHolder">
@@ -58,12 +62,13 @@
                         <div id="pCards">
                             <img src="@Url.Content("~/Images/Cards/" + @player.Cards[0] + ".png")" class="pCard" />
                             <img src="@Url.Content("~/Images/Cards/" + @player.Cards[1] + ".png")" class="pCard" />
-
                         </div>
                     </div>
                 }
                 else
                 {
+                    <p id="inGame" style="display:none">@Model.InGame</p>
+
                     <p class="message">@Model.Message</p>
 
                     <h3 id="sum">@Model.Sum</h3>

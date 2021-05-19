@@ -79,26 +79,29 @@ namespace Pokerweb.Models
                 {
                     player.LastMoney = presetMoney;
                     player.NonFailed = true;
+                    player.Played = false;
                     player.Money = 0;
                 }
-            }
-
-            foreach (Player player in Players)
+            } 
+            else
             {
-                if (!Winners.Contains(player.PlayerName))
+                foreach (Player player in Players)
                 {
-                    player.LastMoney = player.MoneyFinal;
-                }
+                    if (!Winners.Contains(player.PlayerName))
+                    {
+                        player.LastMoney = player.MoneyFinal;
+                    }
 
-                if (player.Left == true)
-                {
-                    player.NonFailed = false;
-                }
+                    if ((player.Left == true) || (player.LastMoney <= 0))
+                    {
+                        player.NonFailed = false;
+                    }
 
-                player.Cards = GetChunk(2);
-                player.Money = 0;
-                player.Played = false;
-                player.InGame = player.NonFailed;
+                    player.Cards = GetChunk(2);
+                    player.Money = 0;
+                    player.Played = false;
+                    player.InGame = player.NonFailed;
+                }
             }
 
             Winners.Clear();
