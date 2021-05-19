@@ -41,6 +41,7 @@ namespace Pokerweb.Models
         public bool InGame { get; set; }
         public DateTime TimeStamp { get; set; } = DateTime.UtcNow;
         public string PagePartialHelper { get; set; }
+        public string Message { get; set; }
         public int endedCase { get; set; } = 1;
         public int Sum { 
             get
@@ -63,6 +64,8 @@ namespace Pokerweb.Models
 
         public void PrepareNextRound()
         {
+            this.Message = "";
+
             Shuffle(ref cardsList);
 
             Queue<string> cards = new Queue<string>(cardsList);

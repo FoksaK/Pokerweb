@@ -14,8 +14,6 @@
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
 
-<img src="@Url.Content("~/Images/Img/monowoodbg.jpg")" id="backGround" />
-
 <div id="header">
     <h1 id="title">Poker - hra</h1>
 
@@ -23,13 +21,14 @@
         <h2 id="key" onmouseout="outFunc()">@Model.Key</h2>
         <span class="tooltiptext" id="myTooltip">Zkopíruj</span>
     </div>
+
     <h2 id="name">@Model.Name</h2>
 </div>
 
 <div id="grid"></div>
 
-<button id="nextCardBtn" class="btn">Další</button>
-<button id="previousCardBtn" class="btn">Předchozí</button>
+<button id="nextCardBtn" class="btn">></button>
+<button id="previousCardBtn" class="btn"><</button>
 
 <div id="controlButtons">
     <div class="buttonsContainer">
@@ -81,9 +80,3 @@
         tooltip.innerHTML = "Zkopíruj";
     }
 </script>
-
-<style>
-    .Playbuttons {
-        display: none;
-    }
-</style>

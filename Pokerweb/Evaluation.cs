@@ -121,7 +121,6 @@ namespace Pokerweb
             values.Sort();
 
             int highest = values[4];
-            int lowest = values[0];
             int highestMultiple = 0;
             int secondMultiple = 0;
             int highestCoeficient = (((highest * 100 + values[3]) * 100 + values[2]) * 100 + values[1]) * 100 + values[0];

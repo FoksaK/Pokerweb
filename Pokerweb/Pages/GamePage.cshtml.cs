@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 /// <summary>
-/// Dodělat css. Udělat js posouvání karet hráčů. Jenom měnit display: inline a none. Dále udělat něco na styl razítka s oznámením výsledků.
-/// Nakonec změnit styl názvů věcí na kartácha dát k tomu ikony.
+/// Dodělat css. Umístit tlačítka předchozí a následující. Dát tam ikony. Uspořádat karty hráčů.
+/// Udělat něco na styl razítka s oznámením výsledků. Něco podobnýho s fold.
 /// Pak vyřešít overflow:hidden na mobilu a zmenšit fonty a mělo by to být okk.
 /// Hráč by měl vsadit vše, ale nejít pod nulu.
 /// Měnění názvu tlačítek při hře.

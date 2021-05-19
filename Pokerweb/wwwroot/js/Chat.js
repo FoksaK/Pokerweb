@@ -118,7 +118,11 @@ window.onload = function () {
             number = 0;
         }
         if (number <= x.length && number >= 0) {
-            x[number].style.display = "contents";
+            x[number].style.display = "block";
+            container.classList.remove("slide");
+            container.classList.remove("slideReversed");
+            void container.offsetWidth;
+            container.classList.add("slide");
         }
 
         actualCard = number;
@@ -126,6 +130,7 @@ window.onload = function () {
     }
 
     function Previous() {
+        var container = document.getElementById("container");
         var x = document.getElementsByClassName("pContainer");
         var a = document.getElementById("actual");
         var number = 0;
@@ -146,10 +151,16 @@ window.onload = function () {
             number = x.length - 1;
         }
         if (number <= x.length && number >= 0) {
-            x[number].style.display = "contents";
+            x[number].style.display = "block";
+            container.classList.remove("slideReversed");
+            container.classList.remove("slide");
+            void container.offsetWidth;
+            container.classList.add("slideReversed");
         }
 
         actualCard = number;
+
+        
     }
 
     var actualCard = null;

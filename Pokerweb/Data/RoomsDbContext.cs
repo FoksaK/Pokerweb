@@ -11,7 +11,7 @@ namespace Pokerweb.Data
         {
             if (((DateTime.Now - lastTime).Hours > 1) && RoomsList.Count > 20)
             {
-                foreach(var x in RoomsList)
+                foreach (var x in RoomsList)
                 {
                     if ((DateTime.Now - x.TimeStamp).Minutes > 10)
                     {

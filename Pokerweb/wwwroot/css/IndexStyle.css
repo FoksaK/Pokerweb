@@ -59,6 +59,7 @@ h1 {
 }
 .btn {
     background-color: #4CAF50;
+    border: 2px solid #4CAF50;
     color: white;
     font-size: 16px;
     transition-duration: 0.4s;
@@ -69,7 +70,6 @@ h1 {
 .btn:hover {
     background-color: white;
     color: #4CAF50;
-    border: 2px solid #4CAF50;
 }
 .inp {
     height:30px;

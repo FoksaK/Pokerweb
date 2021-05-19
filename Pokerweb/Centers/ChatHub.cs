@@ -110,7 +110,11 @@ namespace Pokerweb.Hubs
         {
             int _key = Convert.ToInt32(key);
 
-            RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.PlayerName == username).InGame = false;
+            Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key);
+
+            room.Players.Find(x => x.PlayerName == username).InGame = false;
+
+            room.Message = "Fold";
 
             PlayMessage(key, username);
         }
@@ -120,6 +124,7 @@ namespace Pokerweb.Hubs
         {
             int _key = Convert.ToInt32(key);
             Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key);
+            room.Message = "Check";
 
             ProcessMoney(_key, username);
 
@@ -138,6 +143,8 @@ namespace Pokerweb.Hubs
 
             ProcessMoney(_key, username, _money);
 
+            room.Message = "Raise " + _money;
+
             PlayMessage(key, username);
         }
 
@@ -152,7 +159,7 @@ namespace Pokerweb.Hubs
             player.InGame = false;
             player.Left = true;
 
-            if(isPlaying == "true")
+            if (isPlaying == "true")
             {
                 PlayMessage(key, username);
             }
@@ -213,12 +220,9 @@ namespace Pokerweb.Hubs
                 player.LastMoney = player.MoneyFinal + RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Sum;
                 room.endedCase = 0;
 
-                List<Player> playersClone = new List<Player>();
-                playersClone.AddRange(room.Players);
-
-                if (playersClone.FindAll(x => x.NonFailed == true).Count <= 1)
+                if (room.Players.FindAll(x => x.NonFailed == true).Count <= 1)
                 {
-                    GameAbsolutlyEnded(room);
+                    GameAbsolutelyEnded(room);
                 }
             }
 
@@ -234,7 +238,7 @@ namespace Pokerweb.Hubs
         }
 
         //execute when game has absolutelly ended
-        public void GameAbsolutlyEnded(Room room)
+        public void GameAbsolutelyEnded(Room room)
         {
             room.endedCase = -1;
             room.InGame = false;
