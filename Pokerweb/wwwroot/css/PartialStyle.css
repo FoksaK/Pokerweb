@@ -143,3 +143,16 @@
         opacity: 0;
     }
 }
+
+.iconHolder {
+    margin: auto;
+}
+
+.iconHolder td {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.icon {
+    height: 30px;
+}

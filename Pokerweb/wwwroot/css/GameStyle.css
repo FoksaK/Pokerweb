@@ -63,11 +63,7 @@ h1 {
     grid-row: 1;
     width: auto;
 }
-#grid {
-    grid-row: 2;
-    height: auto;
-    overflow: auto;
-}
+
 #controlButtons {
     width: 100%;
     text-align: center;
@@ -193,6 +189,8 @@ input[type=button], input[type=submit], input[type=reset] {
 
 #grid {
     height: 60vh;
+    overflow: visible;
+    grid-row: 2;
 }
 
 #waitingText {

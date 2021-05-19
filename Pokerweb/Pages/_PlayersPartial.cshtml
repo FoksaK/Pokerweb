@@ -19,7 +19,12 @@
                         {
                             <h1 class="winMessage"><b>@Model.Winners[0]</b> vyhrál!</h1>
 
-                            <h3 id="sum">@Model.Sum</h3>
+                            <table class="iconHolder">
+                                <tr>
+                                    <td><img src="/Images/Img/Money/Bet.png" class="icon"/></td>
+                                    <td><h3 id="sum">@Model.Sum</h3></td>
+                                </tr>
+                            </table>
                         }
                     }
                     else
@@ -46,7 +51,12 @@
 
                         <h1 class="winMessage"><b>@result</b> vyhráli!</h1>
 
-                        <h3 id="sum">@Model.Sum</h3>
+                        <table class="iconHolder">
+                            <tr>
+                                <td><img src="/Images/Img/Money/Bet.png" class="icon" /></td>
+                                <td><h3 id="sum">@Model.Sum</h3></td>
+                            </tr>
+                        </table>
                     }
 
                     <div class="cardHolder">
@@ -71,7 +81,12 @@
 
                     <p class="message">@Model.Message</p>
 
-                    <h3 id="sum">@Model.Sum</h3>
+                    <table class="iconHolder">
+                        <tr>
+                            <td><img src="/Images/Img/Money/Bet.png" class="icon" /></td>
+                            <td><h3 id="sum">@Model.Sum</h3></td>
+                        </tr>
+                    </table>
 
                     @if (Model.Round > 0)
                     {
@@ -117,8 +132,18 @@
 
                             <div class="playerInfo">
                                 <h1 id="pHeading">@player.PlayerName</h1>
-                                <h2 id="pMoney">@player.Money</h2>
-                                <h2 id="pMoneyFinal">@player.MoneyFinal</h2>
+                                <table class="iconHolder">
+                                    <tr>
+                                        <td><img src="Images/Img/Money/Flying.png" class="icon" /></td>
+                                        <td><h2 id="pMoney">@player.Money</h2></td>
+                                    </tr>
+                                </table>
+                                <table class="iconHolder">
+                                    <tr>
+                                        <td><img src="Images/Img/Money/myMoney.png" class="icon" /></td>
+                                        <td><h2 id="pMoneyFinal">@player.MoneyFinal</h2></td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     }
