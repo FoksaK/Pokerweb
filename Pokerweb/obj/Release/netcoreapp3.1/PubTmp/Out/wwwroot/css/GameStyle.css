@@ -203,3 +203,10 @@ input[type=button], input[type=submit], input[type=reset] {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+/*------Chat------*/
+
+.chatContainer {
+    background: white;
+    position: absolute;
+}

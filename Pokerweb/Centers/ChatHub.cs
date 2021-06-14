@@ -5,29 +5,32 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Pokerweb.Hubs
 {
     public class ChatHub : Hub
     {
-        //on connected
         public void Connected(string key, string username)
         {
             int _key = Convert.ToInt32(key);
             Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key);
-            Player player = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.PlayerName == username);
+            List<Player> players = room.Players;
+            Player player = players.Find(x => x.PlayerName == username);
 
             if ((player.Address == string.Empty) || (player.Left == true))
             {
                 player.Address = Context.ConnectionId;
                 player.Left = false;
             }
-            
+
+            actualisePlayerNames(room);
+
             string addressFounder = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.Founder == true).Address;
 
-            foreach (var x in RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players)
+            foreach (var x in players)
             {
-                Clients.Client(x.Address).SendAsync("ReceiveMessage");
+                Clients.Client(x.Address).SendAsync("ReceiveMessage", room.PlayersJson);
             }
 
 
@@ -101,7 +104,7 @@ namespace Pokerweb.Hubs
 
             foreach (var x in RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players)
             {
-            Clients.Client(x.Address).SendAsync("ReceiveMessage");
+                Clients.Client(x.Address).SendAsync("ReceiveMessage", room.PlayersJson);
             }
         }
 
@@ -153,11 +156,24 @@ namespace Pokerweb.Hubs
         {
             int _key = Convert.ToInt32(key);
 
-            Player player = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.Find(x => x.PlayerName == username);
-            int index = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key).Players.FindIndex(x => x.PlayerName == username);
+            Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == _key);
+            List<Player> players = room.Players;
+            Player player = players.Find(x => x.PlayerName == username);
 
             player.InGame = false;
             player.Left = true;
+            player.Founder = false;
+
+            actualisePlayerNames(room);
+
+            IEnumerable<Player> _nextPlayer =
+               from p in players
+               where p.Left == false
+               select p;
+
+            List<Player> _nextPlayerList = _nextPlayer.ToList();
+            Player nextPlayer = _nextPlayerList[0];
+            nextPlayer.Founder = true;
 
             if (isPlaying == "true")
             {
@@ -165,8 +181,35 @@ namespace Pokerweb.Hubs
             }
         }
 
+        //------------------------------------Chat------------------------------
+        public void ChatSend(string user, string message, string _key)
+        {
+            int key = Convert.ToInt32(_key);
+
+            Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key);
+
+            foreach (var x in room.Players)
+            {
+                Clients.Client(x.Address).SendAsync("ChatReceive", user, message);
+            }
+        }
+
         //------------------------------------------ Helping functions ------------------------------------------
         //get money to check
+
+        private void actualisePlayerNames(Room room)
+        {
+            List<Player> players = room.Players;
+
+            IEnumerable<string> _playerNames =
+                from p in players
+                where p.Left == false
+                select p.PlayerName;
+
+            List<string> playerNames = _playerNames.ToList();
+            room.PlayersJson = JsonConvert.SerializeObject(playerNames);
+        }
+
         private void ProcessMoney(int key, string username, int money = 0)
         {
             Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key);
@@ -194,8 +237,7 @@ namespace Pokerweb.Hubs
         {
             Room room = RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key);
 
-            //natural end
-            if (Case == 0)
+            if (Case == 0) //natural end
             {
                 List<string> winners = new List<string>();
                 winners.AddRange(EvaluateRound(key));
@@ -210,8 +252,7 @@ namespace Pokerweb.Hubs
                     player.LastMoney = player.MoneyFinal + prize;
                 }
             }
-            //last stand
-            else
+            else //last stand
             {
                 Player player = room.Players.Find(x => x.InGame == true);
                 string winner = player.PlayerName;
@@ -227,7 +268,7 @@ namespace Pokerweb.Hubs
 
             foreach (var x in RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players)
             {
-                Clients.Client(x.Address).SendAsync("ReceiveMessage");
+                Clients.Client(x.Address).SendAsync("ReceiveMessage", room.PlayersJson);
             }
 
             if (RoomsDbContext.RoomsList.Find(x => x.KeyNumber == key).Players.Count >= 3)
@@ -271,7 +312,6 @@ namespace Pokerweb.Hubs
             }
 
             return true;
-            
         }
 
         //get next playing(non-folded) player

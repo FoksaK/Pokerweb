@@ -1,15 +1,4 @@
-﻿"use strict";
-
-
-function Hide() {
-    var x = document.getElementsByClassName("Playbuttons")
-    var i;
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-    }
-}
-
-var loaded = false;
+﻿var loaded = false;
 
 window.onload = function () {
 
@@ -22,23 +11,23 @@ window.onload = function () {
         document.getElementById("waitingText").style.display = "none";
     });
 
-    connection.on("ReceiveMessage", function () {
-        $(function () {
-            var page = '/GamePage/PlayersPartial?key=' +
-                document.getElementById("key").innerHTML +
-                "&name=" +
-                document.getElementById("name").innerHTML;
-
-            $('#grid').load(page, function () {
-                add();
-            })
+    connection.on("ReceiveMessage", function (jsonPlayers) {
+        var page = '/GamePage/PlayersPartial?key=' +
+            document.getElementById("key").innerHTML +
+            "&name=" +
+            document.getElementById("name").innerHTML;
+        $('#grid').load(page, function () {
+            add();
         })
+
+        console.log("playersJson: " + jsonPlayers);
     });
 
     connection.on("ReceivePlayMessage", function () {
+        isPlaying = "true";
+
         var x = document.getElementsByClassName("Playbuttons")
-        var i;
-        for (i = 0; i < x.length; i++) {
+        for (var i = 0; i < x.length; i++) {
             x[i].style.display = "inline";
         }
     });
@@ -99,6 +88,43 @@ window.onload = function () {
         connection.invoke("LeaveMessage", document.getElementById("key").innerHTML,
             document.getElementById("name").innerHTML, isPlaying)
     };
+
+    //-------------------------------------------
+    //-------------------Chat--------------------
+    //-------------------------------------------
+
+    /*
+    connection.on("ChatReceive", function (user, message) {
+        var li = document.createElement("li");
+        document.getElementById("messagesList").appendChild(li);
+        li.textContent = `${user} : ${message}`;
+    });
+
+    document.getElementById("sendButton").addEventListener("click", function (event) {
+        var user = document.getElementById("name").innerHTML;
+        var message = document.getElementById("messageInput");
+        var key = document.getElementById("key").innerHTML
+
+        if (message.value.length > 0)
+        connection.invoke("chatSend", user, message.value, key).catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+
+        message.value = "";
+    });*/
+
+    //-----------------------------------------
+    //--------------Functions------------------
+    //-----------------------------------------
+
+    function Hide() {
+        var x = document.getElementsByClassName("Playbuttons")
+        var i;
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+    }
 
     function Next() {
 
@@ -168,24 +194,29 @@ window.onload = function () {
     }
 
     var actualCard = null;
-    var x = document.getElementById("nextCardBtn");
-    var y = document.getElementById("previousCardBtn");
 
     function add() {
+        var x = document.getElementById("nextCardBtn");
+        var y = document.getElementById("previousCardBtn");
+        var z = document.getElementById("inGame");
+
         y.onclick = function () { Previous() };
         x.onclick = function () { Next() };
 
-        var inGame = document.getElementById("inGame").innerHTML;
+        if (z) {
+            var inGame = z.innerHTML;
+
+            if (inGame == "True") {
+                document.getElementById("nextCardBtn").style.display = "block";
+                document.getElementById("previousCardBtn").style.display = "block";
+                document.getElementById("waitingText").style.display = "none";
+            } else {
+                document.getElementById("nextCardBtn").style.display = "none";
+                document.getElementById("previousCardBtn").style.display = "none";
+            }
+        }
 
         console.log(inGame);
 
-        if (inGame == "True") {
-            document.getElementById("nextCardBtn").style.display = "block";
-            document.getElementById("previousCardBtn").style.display = "block";
-            document.getElementById("waitingText").style.display = "none";
-        } else {
-            document.getElementById("nextCardBtn").style.display = "none";
-            document.getElementById("previousCardBtn").style.display = "none";
-        }
     }
 };

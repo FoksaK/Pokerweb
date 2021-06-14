@@ -42,6 +42,7 @@ namespace Pokerweb.Models
         public DateTime TimeStamp { get; set; } = DateTime.UtcNow;
         public string PagePartialHelper { get; set; }
         public string Message { get; set; }
+        public string PlayersJson { get; set; } = "";
         public int endedCase { get; set; } = 1;
         public int Sum { 
             get
